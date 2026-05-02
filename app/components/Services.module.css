@@ -1,0 +1,155 @@
+.services {
+  background: var(--bg-primary);
+  padding: 68px 48px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.h2 {
+  font-family: Georgia, 'Palatino Linotype', 'Book Antiqua', serif;
+  font-size: 34px;
+  font-weight: 300;
+  color: var(--cream);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* ─── Card ─── */
+.card {
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  padding: 32px;
+  cursor: default;
+  position: relative;
+  transition: transform 0.25s ease, border-color 0.28s ease;
+}
+
+.card:hover {
+  transform: translateY(-7px);
+  border-color: rgba(200, 150, 60, 0.5);
+}
+
+.card:hover .iconBlock {
+  transform: scale(1.14) rotate(-4deg);
+}
+
+.featured {
+  border: 1px solid rgba(200, 150, 60, 0.22);
+}
+
+.badge {
+  position: absolute;
+  top: -1px;
+  right: 20px;
+  background: var(--gold);
+  color: #0C0D11;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border-radius: 0 0 5px 5px;
+  animation: pulse 2.8s infinite;
+}
+
+.iconBlock {
+  width: 50px;
+  height: 50px;
+  border-radius: 11px;
+  background: rgba(200, 150, 60, 0.07);
+  border: 1px solid rgba(200, 150, 60, 0.16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+  transition: transform 0.3s ease;
+}
+
+.category {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.cardTitle {
+  font-family: Georgia, 'Palatino Linotype', 'Book Antiqua', serif;
+  font-size: 20px;
+  font-weight: 300;
+  color: var(--cream);
+  margin-bottom: 12px;
+}
+
+.description {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin-bottom: 18px;
+}
+
+.features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin-bottom: 24px;
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* ─── Card CTAs ─── */
+.ctaBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border-radius: 5px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.18s, transform 0.15s;
+}
+
+.ctaPrimary {
+  padding: 14px 30px;
+  background: var(--gold);
+  color: #0C0D11;
+  font-weight: 700;
+  font-size: 12px;
+  border: none;
+}
+
+.ctaPrimary:hover {
+  background: var(--gold-hover);
+  transform: translateY(-2px);
+}
+
+.ctaOutline {
+  padding: 12px 20px;
+  background: transparent;
+  border: 1px solid rgba(200, 150, 60, 0.4);
+  color: var(--gold);
+  font-size: 11px;
+}
+
+.ctaOutline:hover {
+  background: rgba(200, 150, 60, 0.1);
+}

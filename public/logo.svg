@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="32" viewBox="0 0 120 32" fill="none">
+  <g transform="translate(0, 4)">
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+      stroke="#C8963C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <polyline points="9 12 11 14 15 10"
+      stroke="#C8963C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+  <text x="30" y="18" font-family="Georgia, serif" font-size="13" font-weight="600"
+    fill="#C8963C" letter-spacing="3">ASN</text>
+  <text x="62" y="18" font-family="-apple-system, sans-serif" font-size="10" font-weight="400"
+    fill="#8A8070" letter-spacing="2">CONSULTING</text>
+</svg>

@@ -1,0 +1,48 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  border-radius: 5px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.primary {
+  background: var(--gold);
+  color: #0C0D11;
+  font-weight: 700;
+  border: none;
+  padding: 14px 30px;
+  font-size: 12px;
+  transition: background 0.18s, transform 0.15s;
+}
+
+.primary:hover {
+  background: var(--gold-hover);
+  transform: translateY(-2px);
+}
+
+.outline {
+  background: transparent;
+  border: 1px solid rgba(200, 150, 60, 0.4);
+  color: var(--gold);
+  padding: 12px 20px;
+  font-size: 11px;
+  transition: background 0.2s;
+}
+
+.outline:hover {
+  background: rgba(200, 150, 60, 0.1);
+}
+
+.fullWidth {
+  width: 100%;
+  justify-content: center;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+}
