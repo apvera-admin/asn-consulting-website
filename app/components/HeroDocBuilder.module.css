@@ -1,0 +1,221 @@
+/* ─── Outer wrapper ─── */
+.wrap {
+  width: 340px;
+  background: var(--bg-card);
+  border-radius: 12px;
+  border: 1px solid var(--gold-border);
+  overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.55);
+  flex-shrink: 0;
+}
+
+/* ─── Title bar ─── */
+.titleBar {
+  padding: 10px 14px;
+  background: var(--bg-primary);
+  border-bottom: 1px solid rgba(200, 150, 60, 0.12);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.barLabel {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-left: 6px;
+}
+
+/* ─── Body ─── */
+.body {
+  padding: 20px;
+}
+
+/* ─── Doc header ─── */
+.docHeader {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.seal {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid var(--gold-border);
+  background: var(--gold-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 10px;
+}
+
+.docTitle {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.docSub {
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 3px;
+}
+
+/* ─── Progress bar ─── */
+.progTrack {
+  height: 2px;
+  background: rgba(200, 150, 60, 0.1);
+  border-radius: 1px;
+  margin-bottom: 14px;
+  overflow: hidden;
+}
+
+.progFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold), var(--gold-hover));
+  border-radius: 1px;
+  width: 0%;
+  transition: width 0.8s ease;
+}
+
+/* ─── Fields ─── */
+.fieldRow {
+  margin-bottom: 10px;
+}
+
+.fieldLabel {
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.fieldBox {
+  height: 28px;
+  background: var(--bg-primary);
+  border: 1px solid rgba(200, 150, 60, 0.18);
+  border-radius: 4px;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  font-size: 11px;
+  color: var(--cream-muted);
+  overflow: hidden;
+}
+
+.twoCol {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+/* ─── Cursor ─── */
+.cursor {
+  display: inline-block;
+  width: 1px;
+  height: 11px;
+  background: var(--gold);
+  margin-left: 1px;
+  animation: blink 0.7s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* ─── Check rows ─── */
+.checkRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 7px;
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.checkShow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.checkIcon {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgba(200, 150, 60, 0.12);
+  border: 1px solid rgba(200, 150, 60, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.checkText {
+  font-size: 10px;
+  color: var(--text-secondary);
+}
+
+/* ─── Stamp ─── */
+.stampWrap {
+  text-align: center;
+  margin-top: 14px;
+}
+
+.stamp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  border: 2.5px solid rgba(200, 150, 60, 0.15);
+  opacity: 0;
+  transform: scale(0.3) rotate(-20deg);
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.stampShow {
+  opacity: 1;
+  transform: scale(1) rotate(-12deg);
+  border-color: rgba(200, 150, 60, 0.55);
+}
+
+.stampInner {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(200, 150, 60, 0.35);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.stampText {
+  font-size: 7px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.stampSub {
+  font-size: 6px;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+}
