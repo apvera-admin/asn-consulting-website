@@ -19,49 +19,51 @@ const footerLinks = {
 export default function Footer() {
   return (
     <footer className={styles.footer}>
-      <div className={styles.top}>
-        <div className={styles.brand}>
-          <div className={styles.logo}>
-            <Image src="/logo.svg" alt="ASN Consulting" width={160} height={36} />
+      <div className={styles.inner}>
+        <div className={styles.top}>
+          <div className={styles.brand}>
+            <div className={styles.logo}>
+              <Image src="/logo.svg" alt="ASN Consulting" width={220} height={55} />
+            </div>
+            <p className={styles.desc}>
+              Expert status correction and private trust services.
+              Chattanooga, Tennessee.
+            </p>
+            <a href="mailto:support@asnconsulting.co" className={styles.email}>
+              support@asnconsulting.co
+            </a>
           </div>
-          <p className={styles.desc}>
-            Expert status correction and private trust services.
-            Chattanooga, Tennessee.
-          </p>
-          <a href="mailto:support@asnconsulting.co" className={styles.email}>
-            support@asnconsulting.co
-          </a>
+
+          <div className={styles.cols}>
+            <div className={styles.col}>
+              <h4 className={styles.colHeading}>Services</h4>
+              <ul className={styles.colLinks}>
+                {footerLinks.services.map((l) => (
+                  <li key={l.label}>
+                    <a href={l.href}>{l.label}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className={styles.col}>
+              <h4 className={styles.colHeading}>Company</h4>
+              <ul className={styles.colLinks}>
+                {footerLinks.company.map((l) => (
+                  <li key={l.label}>
+                    <a href={l.href}>{l.label}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
 
-        <div className={styles.cols}>
-          <div className={styles.col}>
-            <h4 className={styles.colHeading}>Services</h4>
-            <ul className={styles.colLinks}>
-              {footerLinks.services.map((l) => (
-                <li key={l.label}>
-                  <a href={l.href}>{l.label}</a>
-                </li>
-              ))}
-            </ul>
+        <div className={styles.bottom}>
+          <span>© 2025 ASN Consulting. All rights reserved, without prejudice.</span>
+          <div className={styles.bottomLinks}>
+            <a href="/terms">Terms &amp; Conditions</a>
+            <a href="/privacy">Privacy Policy</a>
           </div>
-          <div className={styles.col}>
-            <h4 className={styles.colHeading}>Company</h4>
-            <ul className={styles.colLinks}>
-              {footerLinks.company.map((l) => (
-                <li key={l.label}>
-                  <a href={l.href}>{l.label}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div className={styles.bottom}>
-        <span>© 2025 ASN Consulting. All rights reserved, without prejudice.</span>
-        <div className={styles.bottomLinks}>
-          <a href="/terms">Terms &amp; Conditions</a>
-          <a href="/privacy">Privacy Policy</a>
         </div>
       </div>
     </footer>

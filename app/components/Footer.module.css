@@ -1,6 +1,11 @@
 .footer {
   background: var(--bg-primary);
   border-top: 1px solid rgba(200, 150, 60, 0.1);
+}
+
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 36px 48px 28px;
 }
 
@@ -13,7 +18,7 @@
 
 /* ─── Brand block ─── */
 .brand {
-  max-width: 200px;
+  max-width: 260px;
   display: flex;
   flex-direction: column;
   gap: 10px;
