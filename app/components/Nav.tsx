@@ -6,7 +6,7 @@ export default function Nav() {
     <nav className={styles.nav}>
       <div className={styles.inner}>
         <a href="/" className={styles.logo}>
-          <Image src="/logo.svg" alt="ASN Consulting" width={200} height={50} priority />
+          <Image src="/logo.svg" alt="ASN Consulting" width={280} height={70} priority />
         </a>
 
         <div className={styles.right}>
