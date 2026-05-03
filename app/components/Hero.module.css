@@ -2,12 +2,18 @@
   background-color: var(--bg-primary);
   background-image: radial-gradient(rgba(200, 150, 60, 0.055) 1px, transparent 1px);
   background-size: 28px 28px;
-  padding: 80px 48px 68px;
-  min-height: 560px;
   position: relative;
   overflow: hidden;
+}
+
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 48px 68px;
+  min-height: 560px;
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 .content {
@@ -90,7 +96,7 @@
 /* ─── Decorative Rings ─── */
 .rings {
   position: absolute;
-  right: 40px;
+  right: 48px;
   top: 50%;
   transform: translateY(-50%);
   width: 320px;
