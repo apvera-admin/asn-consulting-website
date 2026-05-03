@@ -13,13 +13,16 @@
   min-height: 560px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 48px;
   position: relative;
 }
 
 .content {
-  max-width: 570px;
+  max-width: 540px;
   position: relative;
   z-index: 1;
+  flex-shrink: 0;
 }
 
 .labelRow {
@@ -91,43 +94,4 @@
 
 .secondaryCta:hover {
   background: rgba(200, 150, 60, 0.1);
-}
-
-/* ─── Decorative Rings ─── */
-.rings {
-  position: absolute;
-  right: 48px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 320px;
-  height: 320px;
-  pointer-events: none;
-}
-
-.outerRing {
-  position: absolute;
-  top: 0;
-  left: 0;
-  animation: spin 55s linear infinite;
-}
-
-.middleRing {
-  position: absolute;
-  top: 34px;
-  left: 34px;
-  animation: spinReverse 38s linear infinite;
-}
-
-.innerCircle {
-  position: absolute;
-  top: 76px;
-  left: 76px;
-  width: 168px;
-  height: 168px;
-  border-radius: 50%;
-  border: 1px solid rgba(200, 150, 60, 0.2);
-  background: rgba(200, 150, 60, 0.03);
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
