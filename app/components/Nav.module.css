@@ -1,7 +1,9 @@
 .nav {
   background: var(--bg-primary);
   border-bottom: 1px solid rgba(200, 150, 60, 0.12);
-  position: static;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .inner {
@@ -16,8 +18,10 @@
 .logo {
   display: flex;
   align-items: center;
+  flex-shrink: 0;
 }
 
+/* ─── Right side ─── */
 .right {
   display: flex;
   align-items: center;
@@ -41,6 +45,7 @@
   color: var(--gold);
 }
 
+/* ─── Book a Call CTA ─── */
 .cta {
   display: inline-block;
   padding: 9px 22px;
@@ -52,8 +57,372 @@
   letter-spacing: 1.5px;
   text-transform: uppercase;
   transition: background 0.2s;
+  white-space: nowrap;
 }
 
 .cta:hover {
   background: rgba(200, 150, 60, 0.1);
+}
+
+/* ─── Services button trigger ─── */
+.megaTrigger {
+  position: relative;
+}
+
+.servicesBtn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s;
+  font-family: inherit;
+}
+
+.servicesBtn:hover,
+.servicesBtnActive {
+  color: var(--gold);
+}
+
+.chevron {
+  transition: transform 0.22s ease;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+/* ─── Mega menu panel ─── */
+.mega {
+  position: absolute;
+  top: calc(100% + 18px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 720px;
+  background: var(--bg-card);
+  border: 1px solid rgba(200, 150, 60, 0.18);
+  border-radius: 12px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%) translateY(-8px);
+  transition: opacity 0.22s ease, transform 0.22s ease;
+  z-index: 200;
+}
+
+/* Gold accent line at top */
+.mega::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  border-radius: 12px 12px 0 0;
+}
+
+.megaOpen {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateX(-50%) translateY(0);
+}
+
+.megaInner {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr;
+  gap: 0;
+  padding: 28px 0;
+}
+
+/* ─── Columns ─── */
+.megaCol {
+  padding: 0 28px;
+}
+
+.megaDivider {
+  width: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  margin: 8px 0;
+}
+
+.megaColHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.megaColLabel {
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.megaColSeeAll {
+  font-size: 10px;
+  color: var(--text-muted);
+  transition: color 0.2s;
+}
+
+.megaColSeeAll:hover {
+  color: var(--gold);
+}
+
+/* ─── DIY plan list ─── */
+.megaPlanList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.megaPlanItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border-radius: 6px;
+  transition: background 0.15s;
+  color: var(--cream-muted);
+}
+
+.megaPlanItem:hover {
+  background: rgba(200, 150, 60, 0.08);
+  color: var(--cream);
+}
+
+.megaPlanDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+.megaPlanLabel {
+  font-size: 12px;
+  flex: 1;
+}
+
+.megaPlanPrice {
+  font-size: 11px;
+  color: var(--gold);
+  font-family: Georgia, serif;
+  font-weight: 300;
+}
+
+/* ─── DFY feature card ─── */
+.megaFeatureCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px;
+  background: rgba(200, 150, 60, 0.05);
+  border: 1px solid rgba(200, 150, 60, 0.14);
+  border-radius: 8px;
+  transition: background 0.2s, border-color 0.2s;
+  margin-top: 4px;
+}
+
+.megaFeatureCard:hover {
+  background: rgba(200, 150, 60, 0.1);
+  border-color: rgba(200, 150, 60, 0.3);
+}
+
+.megaFeatureIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(200, 150, 60, 0.1);
+  border: 1px solid rgba(200, 150, 60, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.megaFeatureTitle {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--cream-muted);
+  margin-bottom: 4px;
+}
+
+.megaFeatureDesc {
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ─── Other services list ─── */
+.megaOtherList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 18px;
+}
+
+.megaOtherItem {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  color: var(--cream-muted);
+  transition: background 0.15s, color 0.15s;
+}
+
+.megaOtherItem:hover {
+  background: rgba(200, 150, 60, 0.08);
+  color: var(--cream);
+}
+
+.megaOtherIcon {
+  font-size: 13px;
+  line-height: 1;
+}
+
+/* ─── CTA inside mega ─── */
+.megaCTAWrap {
+  padding: 14px;
+  background: rgba(200, 150, 60, 0.05);
+  border: 1px solid rgba(200, 150, 60, 0.12);
+  border-radius: 8px;
+}
+
+.megaCTAText {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.megaCTA {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: var(--gold);
+  color: #0C0D11;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border-radius: 4px;
+  transition: background 0.18s;
+}
+
+.megaCTA:hover {
+  background: var(--gold-hover);
+}
+
+/* ─── Hamburger (mobile) ─── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.bar {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-muted);
+  border-radius: 2px;
+  transition: transform 0.25s, opacity 0.25s;
+}
+
+.barTop  { transform: translateY(6.5px) rotate(45deg); }
+.barMid  { opacity: 0; }
+.barBot  { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* ─── Mobile menu ─── */
+.mobileMenu {
+  display: none;
+  flex-direction: column;
+  background: var(--bg-card);
+  border-top: 1px solid rgba(200, 150, 60, 0.12);
+  padding: 16px 24px 24px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+
+.mobileMenuOpen {
+  max-height: 600px;
+}
+
+.mobileLink {
+  padding: 10px 0;
+  font-size: 14px;
+  color: var(--cream-muted);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  transition: color 0.2s;
+}
+
+.mobileLink:hover { color: var(--gold); }
+
+.mobileSectionLabel {
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 14px 0 4px;
+}
+
+.mobilePlanLink {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 9px 0;
+  font-size: 13px;
+  color: var(--cream-muted);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.mobilePlanPrice {
+  font-size: 12px;
+  color: var(--gold);
+  font-family: Georgia, serif;
+}
+
+.mobileCTA {
+  margin-top: 18px;
+  padding: 13px;
+  background: var(--gold);
+  color: #0C0D11;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border-radius: 5px;
+  text-align: center;
+  transition: background 0.18s;
+}
+
+.mobileCTA:hover { background: var(--gold-hover); }
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .inner { padding: 16px 24px; }
+
+  .links,
+  .cta  { display: none; }
+
+  .hamburger      { display: flex; }
+  .mobileMenu     { display: flex; }
 }
