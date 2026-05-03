@@ -22,15 +22,6 @@
 .logo {
   display: flex;
   align-items: center;
-  gap: 8px;
-}
-
-.logoText {
-  font-size: 13px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--gold);
-  font-weight: 600;
 }
 
 .desc {

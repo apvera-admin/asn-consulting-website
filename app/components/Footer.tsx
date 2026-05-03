@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import styles from './Footer.module.css';
 
 const footerLinks = {
@@ -21,12 +22,7 @@ export default function Footer() {
       <div className={styles.top}>
         <div className={styles.brand}>
           <div className={styles.logo}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-              stroke="var(--gold)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-              <polyline points="9 12 11 14 15 10"/>
-            </svg>
-            <span className={styles.logoText}>ASN Consulting</span>
+            <Image src="/logo.svg" alt="ASN Consulting" width={160} height={36} />
           </div>
           <p className={styles.desc}>
             Expert status correction and private trust services.
