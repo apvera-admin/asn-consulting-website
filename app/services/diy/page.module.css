@@ -1,0 +1,633 @@
+/* ─── Shared ─── */
+.maxW {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+/* ─── Buttons ─── */
+.primaryBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 30px;
+  background: var(--gold);
+  color: #0C0D11;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border-radius: 5px;
+  transition: background 0.18s, transform 0.15s;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.primaryBtn:hover {
+  background: var(--gold-hover);
+  transform: translateY(-2px);
+}
+
+.outlineBtn {
+  display: inline-flex;
+  align-items: center;
+  padding: 14px 24px;
+  background: transparent;
+  border: 1px solid rgba(200, 150, 60, 0.4);
+  color: var(--gold);
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border-radius: 5px;
+  transition: background 0.2s;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.outlineBtn:hover {
+  background: rgba(200, 150, 60, 0.1);
+}
+
+/* ─── Page Hero ─── */
+.hero {
+  background-color: var(--bg-primary);
+  background-image: radial-gradient(rgba(200, 150, 60, 0.055) 1px, transparent 1px);
+  background-size: 28px 28px;
+  padding: 64px 0 72px;
+}
+
+.heroInner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  letter-spacing: 0.5px;
+}
+
+.breadcrumb a {
+  color: var(--text-muted);
+  transition: color 0.2s;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover { color: var(--gold); }
+
+.breadcrumb span { color: rgba(200, 150, 60, 0.45); }
+
+.heroH1 {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 52px;
+  font-weight: 300;
+  line-height: 1.08;
+  color: var(--cream);
+  margin-bottom: 20px;
+  margin-top: 4px;
+}
+
+.heroGold {
+  color: var(--gold);
+  font-style: italic;
+}
+
+.heroSub {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.8;
+  max-width: 520px;
+  margin-bottom: 32px;
+}
+
+.heroCTAs {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* ─── Features (What You Get) ─── */
+.featuresSection {
+  background: var(--bg-secondary);
+  padding: 68px 0;
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.featureCard {
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  padding: 28px;
+  transition: border-color 0.25s, transform 0.25s;
+}
+
+.featureCard:hover {
+  border-color: rgba(200, 150, 60, 0.3);
+  transform: translateY(-4px);
+}
+
+.iconBlock {
+  width: 50px;
+  height: 50px;
+  border-radius: 11px;
+  background: rgba(200, 150, 60, 0.07);
+  border: 1px solid rgba(200, 150, 60, 0.16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.featureTitle {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--cream-muted);
+  margin-bottom: 10px;
+}
+
+.featureDesc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ─── Plans Section ─── */
+.plansSection {
+  background: var(--bg-primary);
+  padding: 68px 0;
+}
+
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.sectionH2 {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 34px;
+  font-weight: 300;
+  color: var(--cream);
+  line-height: 1.2;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+/* View toggle */
+.viewToggle {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 36px;
+  border: 1px solid rgba(200, 150, 60, 0.25);
+  border-radius: 6px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+}
+
+.toggleBtn {
+  padding: 10px 22px;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 12px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+}
+
+.toggleBtn:hover {
+  color: var(--cream-muted);
+  background: rgba(200, 150, 60, 0.06);
+}
+
+.toggleActive {
+  background: rgba(200, 150, 60, 0.14);
+  color: var(--gold);
+}
+
+/* ─── Cards Grid ─── */
+.plansGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.planCard {
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.25s, transform 0.25s;
+}
+
+.planCard:hover {
+  border-color: rgba(200, 150, 60, 0.4);
+  transform: translateY(-6px);
+}
+
+.planCardPopular {
+  border: 1px solid rgba(200, 150, 60, 0.35);
+}
+
+.popularBadge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: var(--gold);
+  color: #0C0D11;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: 0 10px 0 8px;
+}
+
+.planCategory {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.planName {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 22px;
+  font-weight: 300;
+  color: var(--cream);
+  margin-bottom: 12px;
+}
+
+.planPrice {
+  display: flex;
+  align-items: flex-start;
+  gap: 2px;
+  margin-bottom: 10px;
+  line-height: 1;
+}
+
+.priceDollar {
+  font-size: 20px;
+  color: var(--gold);
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-weight: 300;
+  margin-top: 8px;
+}
+
+.priceAmount {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 48px;
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1;
+}
+
+.planTagline {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+
+.planDivider {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  margin-bottom: 18px;
+}
+
+.planFeatures {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin-bottom: 24px;
+}
+
+.planFeatureItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.planFeatureItem svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.planCTA {
+  display: block;
+  text-align: center;
+  padding: 13px;
+  background: var(--gold);
+  color: #0C0D11;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border-radius: 5px;
+  transition: background 0.18s, transform 0.15s;
+  text-decoration: none;
+}
+
+.planCTA:hover {
+  background: var(--gold-hover);
+  transform: translateY(-1px);
+}
+
+/* ─── Compare Table ─── */
+.tableWrapper {
+  overflow-x: auto;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.compareTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.thFeature {
+  width: 32%;
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 2px solid rgba(200, 150, 60, 0.3);
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: var(--bg-card);
+}
+
+.thPlan {
+  padding: 14px 16px;
+  text-align: center;
+  border-bottom: 2px solid rgba(200, 150, 60, 0.3);
+  background: var(--bg-card);
+  min-width: 120px;
+}
+
+.thPopular .thPlanName,
+.thPopular .thPlanPrice {
+  color: var(--gold);
+}
+
+.thPlanName {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--cream-muted);
+  margin-bottom: 4px;
+}
+
+.thPlanPrice {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.rowOdd {
+  background: var(--bg-primary);
+}
+
+.rowEven {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.tdFeature {
+  padding: 11px 16px;
+  color: var(--text-muted);
+  font-size: 13px;
+  text-align: left;
+  line-height: 1.5;
+}
+
+.tdCell {
+  padding: 11px 16px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.tdCell svg {
+  display: inline-block;
+}
+
+.dash {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.ctaRow td {
+  padding: 20px 16px;
+  background: var(--bg-card);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.ctaCell {
+  text-align: center;
+}
+
+.tableBtn {
+  display: inline-block;
+  padding: 10px 18px;
+  background: var(--gold);
+  color: #0C0D11;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border-radius: 5px;
+  transition: background 0.18s;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.tableBtn:hover { background: var(--gold-hover); }
+
+/* ─── FAQ ─── */
+.faqSection {
+  background: var(--bg-secondary);
+  padding: 68px 0;
+}
+
+.faqGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px 48px;
+}
+
+.faqItem {
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.faqQ {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--cream-muted);
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.faqA {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin: 0;
+}
+
+/* ─── DFY Upsell Banner ─── */
+.upsellBanner {
+  background: var(--bg-card);
+  border-top: 1px solid rgba(200, 150, 60, 0.15);
+  border-bottom: 1px solid rgba(200, 150, 60, 0.15);
+  padding: 48px 0;
+}
+
+.upsellInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.upsellLabel {
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+
+.upsellH3 {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 26px;
+  font-weight: 300;
+  color: var(--cream);
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.upsellDesc {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  max-width: 420px;
+  margin: 0;
+}
+
+.upsellRight {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+
+/* ─── Final CTA ─── */
+.finalCTA {
+  background: var(--bg-primary);
+  padding: 68px 0;
+}
+
+.finalCTAInner {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.finalH2 {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 34px;
+  font-weight: 300;
+  color: var(--cream);
+  margin-bottom: 16px;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.finalSub {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .maxW {
+    padding: 0 24px;
+  }
+
+  .heroInner {
+    padding: 0 24px;
+  }
+
+  .heroH1 {
+    font-size: 36px;
+  }
+
+  .heroCTAs {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .featuresGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .plansGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .tableWrapper {
+    overflow-x: auto;
+  }
+
+  .faqGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .upsellInner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .upsellRight {
+    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .finalH2 {
+    font-size: 28px;
+  }
+}
