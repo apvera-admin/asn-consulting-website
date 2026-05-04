@@ -1,0 +1,944 @@
+/* ─── Shared widths ─── */
+.maxW {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+.maxWNarrow {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+.formMaxW {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+/* ─── Section header ─── */
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 52px;
+}
+
+.sectionH2 {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 34px;
+  font-weight: 300;
+  color: var(--cream);
+  line-height: 1.2;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.sectionSub {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.75;
+  max-width: 520px;
+  margin: 14px auto 0;
+  text-align: center;
+}
+
+/* ─── Body text ─── */
+.bodyText {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin: 0;
+}
+
+/* ─── Buttons ─── */
+.primaryBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 30px;
+  background: var(--gold);
+  color: #0C0D11;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border-radius: 5px;
+  transition: background 0.18s, transform 0.15s;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.primaryBtn:hover {
+  background: var(--gold-hover);
+  transform: translateY(-2px);
+}
+
+.outlineBtn {
+  display: inline-flex;
+  align-items: center;
+  padding: 14px 24px;
+  background: transparent;
+  border: 1px solid rgba(200, 150, 60, 0.4);
+  color: var(--gold);
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border-radius: 5px;
+  transition: background 0.2s;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.outlineBtn:hover {
+  background: rgba(200, 150, 60, 0.1);
+}
+
+/* ─── Icon block ─── */
+.iconBlock {
+  width: 50px;
+  height: 50px;
+  border-radius: 11px;
+  background: rgba(200, 150, 60, 0.07);
+  border: 1px solid rgba(200, 150, 60, 0.16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+  flex-shrink: 0;
+}
+
+/* ─── 1. Hero ─── */
+.hero {
+  background-color: var(--bg-primary);
+  background-image: radial-gradient(rgba(200, 150, 60, 0.055) 1px, transparent 1px);
+  background-size: 28px 28px;
+  padding: 80px 48px;
+}
+
+.heroInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  letter-spacing: 0.5px;
+}
+
+.breadcrumb a {
+  color: var(--text-muted);
+  transition: color 0.2s;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover { color: var(--gold); }
+
+.breadcrumb span { color: rgba(200, 150, 60, 0.45); }
+
+.heroH1 {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 50px;
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--cream);
+  margin-bottom: 20px;
+  margin-top: 4px;
+}
+
+.heroGold {
+  color: var(--gold);
+  font-style: italic;
+}
+
+.heroSub {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.8;
+  max-width: 580px;
+  margin: 0 auto 32px;
+}
+
+.heroCTAs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
+}
+
+.badges {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+}
+
+/* ─── 2. The Problem ─── */
+.problemSection {
+  background: var(--bg-secondary);
+  padding: 80px 0;
+}
+
+.problemGrid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 64px;
+  align-items: center;
+}
+
+.problemH2 {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 34px;
+  font-weight: 300;
+  color: var(--cream);
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.problemRight {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.statCard {
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  padding: 22px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  transition: border-color 0.25s;
+}
+
+.statCard:hover {
+  border-color: rgba(200, 150, 60, 0.25);
+}
+
+.statNum {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 38px;
+  font-weight: 300;
+  color: var(--gold);
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.statInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.statLabel {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--cream-muted);
+}
+
+.statDesc {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ─── 3. Services ─── */
+.servicesSection {
+  background: var(--bg-primary);
+  padding: 80px 0;
+}
+
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.serviceCard {
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  padding: 36px;
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+  transition: border-color 0.28s, transform 0.25s;
+  display: flex;
+  flex-direction: column;
+}
+
+.serviceCard:hover {
+  border-color: rgba(200, 150, 60, 0.4);
+  transform: translateY(-6px);
+}
+
+.serviceCardFeatured {
+  border: 1px solid rgba(200, 150, 60, 0.3);
+}
+
+.featuredBadge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: var(--gold);
+  color: #0C0D11;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: 0 10px 0 8px;
+  animation: pulse 2.5s ease-in-out infinite;
+}
+
+.cardCategory {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.cardTitle {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 22px;
+  font-weight: 300;
+  color: var(--cream);
+  margin-bottom: 8px;
+}
+
+.cardSubtitle {
+  font-size: 11px;
+  font-style: italic;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.cardPrice {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 20px;
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1.2;
+}
+
+.cardPriceSub {
+  font-size: 11px;
+  font-style: italic;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+.cardDesc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin-bottom: 14px;
+}
+
+.eligibilityPill {
+  display: inline-block;
+  width: fit-content;
+  background: rgba(200, 150, 60, 0.08);
+  border: 1px solid rgba(200, 150, 60, 0.18);
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+  line-height: 1.4;
+}
+
+.cardDivider {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  margin-bottom: 16px;
+}
+
+.featureList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin-bottom: 24px;
+  flex: 1;
+}
+
+.featureItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.featureItem svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.cardCTAPrimary {
+  display: block;
+  text-align: center;
+  padding: 13px;
+  background: var(--gold);
+  color: #0C0D11;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border-radius: 5px;
+  transition: background 0.18s, transform 0.15s;
+  text-decoration: none;
+  margin-top: auto;
+}
+
+.cardCTAPrimary:hover {
+  background: var(--gold-hover);
+  transform: translateY(-1px);
+}
+
+.cardCTAOutline {
+  display: block;
+  text-align: center;
+  padding: 13px;
+  background: transparent;
+  border: 1px solid rgba(200, 150, 60, 0.4);
+  color: var(--gold);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border-radius: 5px;
+  transition: background 0.2s;
+  text-decoration: none;
+  margin-top: auto;
+}
+
+.cardCTAOutline:hover {
+  background: rgba(200, 150, 60, 0.1);
+}
+
+/* ─── 4. How It Works ─── */
+.howSection {
+  background: var(--bg-secondary);
+  padding: 80px 0;
+}
+
+.timeline {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.timelineItem {
+  display: flex;
+  gap: 24px;
+}
+
+.timelineLeft {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.timelineNum {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(200, 150, 60, 0.4);
+  background: var(--bg-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 1px;
+  flex-shrink: 0;
+}
+
+.timelineLine {
+  width: 1px;
+  flex: 1;
+  background: rgba(200, 150, 60, 0.14);
+  margin: 6px 0;
+  min-height: 24px;
+}
+
+.timelineContent {
+  padding-bottom: 32px;
+  flex: 1;
+}
+
+.timelineTime {
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+
+.timelineTitle {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--cream-muted);
+  margin-bottom: 6px;
+}
+
+.timelineDesc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ─── 5. Pricing ─── */
+.pricingSection {
+  background: var(--bg-primary);
+  padding: 80px 0;
+}
+
+.pricingGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.pricingCard {
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  padding: 28px;
+}
+
+.pricingCardFeatured {
+  border: 1px solid rgba(200, 150, 60, 0.3);
+}
+
+.pricingAmount {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 24px;
+  font-weight: 300;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+
+.pricingAmountSub {
+  font-size: 12px;
+  font-style: italic;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.pricingDivider {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  margin-bottom: 16px;
+}
+
+.pricingFactors {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.pricingFactors li {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.55;
+  padding-left: 14px;
+  position: relative;
+}
+
+.pricingFactors li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--gold);
+  opacity: 0.7;
+}
+
+.pricingNote {
+  background: rgba(200, 150, 60, 0.05);
+  border: 1px solid rgba(200, 150, 60, 0.15);
+  border-radius: 6px;
+  padding: 12px;
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ─── 6. FAQ ─── */
+.faqSection {
+  background: var(--bg-secondary);
+  padding: 80px 0;
+}
+
+.faqGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px 48px;
+}
+
+.faqItem {
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.faqQ {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--cream-muted);
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.faqA {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin: 0;
+}
+
+/* ─── 7. Inquiry Form ─── */
+.formSection {
+  background: var(--bg-primary);
+  padding: 80px 0;
+}
+
+.formIntro {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.75;
+  max-width: 500px;
+  margin: 14px auto 44px;
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.formField {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fieldLabel {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.fieldInput,
+.fieldSelect,
+.fieldTextarea {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--bg-secondary);
+  border: 1px solid rgba(200, 150, 60, 0.18);
+  border-radius: 5px;
+  color: var(--cream);
+  font-size: 13px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.fieldInput:focus,
+.fieldSelect:focus,
+.fieldTextarea:focus {
+  border-color: rgba(200, 150, 60, 0.5);
+}
+
+.fieldInput::placeholder,
+.fieldTextarea::placeholder {
+  color: var(--text-muted);
+  opacity: 0.7;
+}
+
+.fieldTextarea {
+  resize: vertical;
+  line-height: 1.6;
+}
+
+/* Custom select */
+.selectWrap {
+  position: relative;
+}
+
+.fieldSelect {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+.fieldSelect option {
+  background: var(--bg-secondary);
+  color: var(--cream);
+}
+
+.selectArrow {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+}
+
+/* Checkbox */
+.checkboxLabel {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.checkbox {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  border: 1px solid rgba(200, 150, 60, 0.35);
+  border-radius: 3px;
+  background: var(--bg-secondary);
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  margin-top: 1px;
+  position: relative;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.checkbox:checked {
+  background: var(--gold);
+  border-color: var(--gold);
+}
+
+.checkbox:checked::after {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 5px;
+  height: 9px;
+  border: 2px solid #0C0D11;
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg);
+}
+
+.submitBtn {
+  width: 100%;
+  padding: 14px;
+  background: var(--gold);
+  color: #0C0D11;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.18s, transform 0.15s;
+  font-family: inherit;
+}
+
+.submitBtn:hover {
+  background: var(--gold-hover);
+  transform: translateY(-2px);
+}
+
+/* ─── Success state ─── */
+.successState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  padding: 48px 24px;
+  background: var(--bg-card);
+  border: 1px solid rgba(200, 150, 60, 0.2);
+  border-radius: 12px;
+}
+
+.successH3 {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 24px;
+  font-weight: 300;
+  color: var(--cream);
+  margin: 0;
+}
+
+.successText {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.75;
+  max-width: 440px;
+  margin: 0;
+}
+
+/* ─── 8. Final CTA Banner ─── */
+.ctaBanner {
+  background: var(--bg-card);
+  border-top: 1px solid rgba(200, 150, 60, 0.15);
+  border-bottom: 1px solid rgba(200, 150, 60, 0.15);
+  padding: 56px 48px;
+}
+
+.ctaBannerInner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.ctaLabel {
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+
+.ctaH3 {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 28px;
+  font-weight: 300;
+  color: var(--cream);
+  line-height: 1.2;
+  margin: 0 0 10px;
+}
+
+.ctaDesc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin: 0;
+  max-width: 400px;
+}
+
+.ctaRight {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .maxW,
+  .maxWNarrow,
+  .formMaxW {
+    padding: 0 24px;
+  }
+
+  .hero {
+    padding: 56px 24px;
+  }
+
+  .heroH1 {
+    font-size: 34px;
+  }
+
+  .heroCTAs {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .problemGrid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .problemH2 {
+    font-size: 26px;
+  }
+
+  .servicesGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .pricingGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .faqGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .formRow {
+    grid-template-columns: 1fr;
+  }
+
+  .ctaBanner {
+    padding: 48px 24px;
+  }
+
+  .ctaBannerInner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .ctaDesc {
+    max-width: 100%;
+  }
+
+  .ctaRight {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .sectionH2 {
+    font-size: 26px;
+  }
+}
