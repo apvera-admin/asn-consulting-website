@@ -380,65 +380,6 @@ export default function AboutPage() {
           </section>
         </ScrollReveal>
 
-        {/* ── 7. Location & Contact ── */}
-        <section className={styles.locationSection}>
-          <div className={styles.maxW}>
-            <div className={styles.locationInner}>
-              <div className={styles.locationLeft}>
-                <div className={styles.locationLabel}>Based In</div>
-                <div className={styles.locationCity}>Chattanooga, Tennessee</div>
-                <a href="mailto:support@asnconsulting.co" className={styles.locationEmail}>
-                  support@asnconsulting.co
-                </a>
-              </div>
-
-              <div className={styles.locationSocial}>
-                <a
-                  href="https://www.instagram.com/asndocuments/"
-                  className={styles.socialLink}
-                  aria-label="Instagram"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="2" y="2" width="20" height="20" rx="5" />
-                    <circle cx="12" cy="12" r="4" />
-                    <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" />
-                  </svg>
-                </a>
-                <a
-                  href="https://www.facebook.com/asndocuments/"
-                  className={styles.socialLink}
-                  aria-label="Facebook"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
-                  </svg>
-                </a>
-                <a
-                  href="https://www.youtube.com/user/Wix"
-                  className={styles.socialLink}
-                  aria-label="YouTube"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58z" />
-                    <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" />
-                  </svg>
-                </a>
-              </div>
-
-              <a href="/services" className={styles.primaryBtn}>Book a Free Strategy Call</a>
-            </div>
-          </div>
-        </section>
-
         {/* ── 8. Final CTA Banner ── */}
         <section className={styles.ctaBanner}>
           <div className={styles.ctaBannerInner}>
