@@ -1,0 +1,882 @@
+/* ─── Shared widths ─── */
+.maxW {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+.maxWNarrow {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+/* ─── Section header block ─── */
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 52px;
+}
+
+.sectionH2 {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 34px;
+  font-weight: 300;
+  color: var(--cream);
+  line-height: 1.2;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.sectionSub {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.75;
+  max-width: 520px;
+  margin: 14px auto 0;
+  text-align: center;
+}
+
+/* ─── Shared body text ─── */
+.bodyText {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin: 0 0 18px;
+}
+
+/* ─── Buttons ─── */
+.primaryBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 30px;
+  background: var(--gold);
+  color: #0C0D11;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border-radius: 5px;
+  transition: background 0.18s, transform 0.15s;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.primaryBtn:hover {
+  background: var(--gold-hover);
+  transform: translateY(-2px);
+}
+
+.outlineBtn {
+  display: inline-flex;
+  align-items: center;
+  padding: 14px 24px;
+  background: transparent;
+  border: 1px solid rgba(200, 150, 60, 0.4);
+  color: var(--gold);
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border-radius: 5px;
+  transition: background 0.2s;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.outlineBtn:hover {
+  background: rgba(200, 150, 60, 0.1);
+}
+
+/* ─── Icon blocks ─── */
+.iconBlock {
+  width: 50px;
+  height: 50px;
+  border-radius: 11px;
+  background: rgba(200, 150, 60, 0.07);
+  border: 1px solid rgba(200, 150, 60, 0.16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+  flex-shrink: 0;
+}
+
+/* ─── 1. Hero ─── */
+.hero {
+  background-color: var(--bg-primary);
+  background-image: radial-gradient(rgba(200, 150, 60, 0.055) 1px, transparent 1px);
+  background-size: 28px 28px;
+  padding: 64px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.heroLeft {
+  max-width: 540px;
+  flex: 1;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  letter-spacing: 0.5px;
+}
+
+.breadcrumb a {
+  color: var(--text-muted);
+  transition: color 0.2s;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover { color: var(--gold); }
+
+.breadcrumb span { color: rgba(200, 150, 60, 0.45); }
+
+.heroH1 {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 50px;
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--cream);
+  margin-bottom: 20px;
+  margin-top: 4px;
+}
+
+.heroGold {
+  color: var(--gold);
+  font-style: italic;
+}
+
+.heroSub {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.8;
+  max-width: 440px;
+  margin-bottom: 32px;
+}
+
+.heroCTAs {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+}
+
+/* Decorative rings */
+.heroRight {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ringsWrap {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ringOuter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: spin 55s linear infinite;
+}
+
+.ringMiddle {
+  position: absolute;
+  top: 35px;
+  left: 35px;
+  animation: spinReverse 38s linear infinite;
+}
+
+.ringInner {
+  position: absolute;
+  top: 76px;
+  left: 76px;
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  border: 1px solid rgba(200, 150, 60, 0.22);
+  background: rgba(200, 150, 60, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ─── 2. What Is a Private Trust ─── */
+.whatSection {
+  background: var(--bg-secondary);
+  padding: 80px 0;
+}
+
+.whatH2 {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 34px;
+  font-weight: 300;
+  color: var(--cream);
+  line-height: 1.2;
+  margin-bottom: 36px;
+}
+
+.whatGrid {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 52px;
+  align-items: start;
+}
+
+.whatLeft {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Callout box */
+.callout {
+  background: rgba(200, 150, 60, 0.04);
+  border: 1px solid rgba(200, 150, 60, 0.2);
+  border-radius: 12px;
+  padding: 28px;
+}
+
+.calloutLabel {
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.calloutH3 {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 18px;
+  font-weight: 300;
+  color: var(--cream);
+  margin-bottom: 20px;
+}
+
+.comparisonRow {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.compPill {
+  display: inline-block;
+  width: fit-content;
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.compPill[data-type="statutory"] {
+  background: rgba(224, 90, 90, 0.1);
+  border: 1px solid rgba(224, 90, 90, 0.25);
+  color: #E05A5A;
+}
+
+.compPill[data-type="common"] {
+  background: rgba(200, 150, 60, 0.1);
+  border: 1px solid rgba(200, 150, 60, 0.3);
+  color: var(--gold);
+}
+
+.compDesc {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin: 0;
+}
+
+.calloutDivider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.07);
+  margin: 18px 0;
+}
+
+/* ─── 3. How It Works ─── */
+.howSection {
+  background: var(--bg-primary);
+  padding: 80px 0;
+}
+
+.rolesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.roleCard {
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  padding: 32px;
+  transition: border-color 0.25s, transform 0.25s;
+}
+
+.roleCard:hover {
+  border-color: rgba(200, 150, 60, 0.4);
+  transform: translateY(-6px);
+}
+
+.roleLabel {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 18px;
+  font-weight: 300;
+  color: var(--cream);
+  margin-bottom: 12px;
+}
+
+.roleDesc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin: 0 0 14px;
+}
+
+.roleNote {
+  font-size: 11px;
+  font-style: italic;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* Flow diagram */
+.flowDiagram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  background: rgba(200, 150, 60, 0.04);
+  border: 1px solid rgba(200, 150, 60, 0.12);
+  border-radius: 8px;
+  padding: 18px 24px;
+  margin-top: 32px;
+}
+
+.flowNode {
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--cream-muted);
+  white-space: nowrap;
+}
+
+/* ─── 4. What a Trust Protects ─── */
+.protectsSection {
+  background: var(--bg-secondary);
+  padding: 80px 0;
+}
+
+.assetsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.assetCard {
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: border-color 0.25s;
+}
+
+.assetCard:hover {
+  border-color: rgba(200, 150, 60, 0.3);
+}
+
+.assetIconBlock {
+  width: 46px;
+  height: 46px;
+  border-radius: 9px;
+  background: rgba(200, 150, 60, 0.07);
+  border: 1px solid rgba(200, 150, 60, 0.16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.assetTitle {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--cream-muted);
+}
+
+.assetDesc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* ─── 5. Key Benefits ─── */
+.benefitsSection {
+  background: var(--bg-primary);
+  padding: 80px 0;
+}
+
+.benefitsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+}
+
+.benefitItem {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.benefitIconBlock {
+  width: 44px;
+  height: 44px;
+  border-radius: 9px;
+  background: rgba(200, 150, 60, 0.07);
+  border: 1px solid rgba(200, 150, 60, 0.16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.benefitTitle {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--cream-muted);
+}
+
+.benefitBody {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin: 0;
+}
+
+/* ─── 6. Misconceptions ─── */
+.mythSection {
+  background: var(--bg-secondary);
+  padding: 80px 0;
+}
+
+.mythStack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mythCard {
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  padding: 24px 28px;
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  gap: 28px;
+  align-items: start;
+  transition: border-color 0.25s;
+}
+
+.mythCard:hover {
+  border-color: rgba(200, 150, 60, 0.2);
+}
+
+.mythLeft,
+.mythRight {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mythPill {
+  display: inline-block;
+  width: fit-content;
+  background: rgba(224, 90, 90, 0.08);
+  border: 1px solid rgba(224, 90, 90, 0.2);
+  color: #E05A5A;
+  border-radius: 4px;
+  padding: 4px 12px;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.truthPill {
+  display: inline-block;
+  width: fit-content;
+  background: rgba(200, 150, 60, 0.1);
+  border: 1px solid rgba(200, 150, 60, 0.3);
+  color: var(--gold);
+  border-radius: 4px;
+  padding: 4px 12px;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.mythText {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--cream-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.truthText {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin: 0;
+}
+
+.mythDivider {
+  width: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  align-self: stretch;
+}
+
+/* ─── 7. Meet Jenna ─── */
+.jennaSection {
+  background: var(--bg-primary);
+  padding: 80px 0;
+}
+
+.jennaGrid {
+  display: flex;
+  align-items: center;
+  gap: 64px;
+}
+
+.jennaLeft {
+  flex: 1;
+}
+
+.jennaH2 {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 38px;
+  font-weight: 300;
+  color: var(--cream);
+  margin-bottom: 20px;
+  line-height: 1.15;
+}
+
+.jennaCTAs {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+
+/* Jenna card */
+.jennaCard {
+  width: 320px;
+  flex-shrink: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--gold-border, rgba(200, 150, 60, 0.22));
+  border-radius: 12px;
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.jennaCardAccent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.jennaAvatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(200, 150, 60, 0.1);
+  border: 2px solid rgba(200, 150, 60, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 28px;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+
+.jennaName {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 20px;
+  font-weight: 300;
+  color: var(--cream);
+  margin-bottom: 6px;
+}
+
+.jennaTitle {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+
+.jennaQuote {
+  border-left: 2px solid var(--gold);
+  padding-left: 14px;
+  font-style: italic;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  text-align: left;
+  margin: 0 0 22px;
+}
+
+.jennaStats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 16px;
+  width: 100%;
+}
+
+.jennaStat {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.jennaStatDivider {
+  width: 1px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* ─── 8. FAQ ─── */
+.faqSection {
+  background: var(--bg-secondary);
+  padding: 80px 0;
+}
+
+.faqGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px 48px;
+}
+
+.faqItem {
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.faqQ {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--cream-muted);
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.faqA {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin: 0;
+}
+
+/* ─── 9. Final CTA Banner ─── */
+.ctaBanner {
+  background: var(--bg-card);
+  border-top: 1px solid rgba(200, 150, 60, 0.15);
+  border-bottom: 1px solid rgba(200, 150, 60, 0.15);
+  padding: 56px 48px;
+}
+
+.ctaBannerInner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.ctaLabel {
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+
+.ctaH3 {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 28px;
+  font-weight: 300;
+  color: var(--cream);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.ctaRight {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .maxW,
+  .maxWNarrow {
+    padding: 0 24px;
+  }
+
+  /* Hero */
+  .hero {
+    flex-direction: column;
+    padding: 48px 24px;
+    align-items: flex-start;
+  }
+
+  .heroH1 { font-size: 36px; }
+
+  .heroRight {
+    width: 100%;
+    justify-content: center;
+    margin-top: 8px;
+  }
+
+  .heroCTAs {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* What section */
+  .whatGrid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .whatH2 { font-size: 26px; }
+
+  /* How it works */
+  .rolesGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .flowDiagram {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  /* Assets */
+  .assetsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Benefits */
+  .benefitsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Misconceptions */
+  .mythCard {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .mythDivider {
+    width: 100%;
+    height: 1px;
+    align-self: auto;
+  }
+
+  /* Jenna */
+  .jennaGrid {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .jennaCard {
+    width: 100%;
+  }
+
+  .jennaH2 { font-size: 30px; }
+
+  .jennaCTAs {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* FAQ */
+  .faqGrid {
+    grid-template-columns: 1fr;
+  }
+
+  /* CTA Banner */
+  .ctaBanner {
+    padding: 48px 24px;
+  }
+
+  .ctaBannerInner {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .ctaRight {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .sectionH2 { font-size: 26px; }
+}
+
+@media (max-width: 480px) {
+  .assetsGrid {
+    grid-template-columns: 1fr;
+  }
+}
