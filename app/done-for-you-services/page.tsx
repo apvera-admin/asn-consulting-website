@@ -20,13 +20,11 @@ const included = [
   'Mandatory Notice — Foreign Sovereign Immunities Act',
   'Paramount Claim of Life',
   '2 Witness Testimonies',
-  'Revocation of Election to Pay Taxes Cover Letters (NY & DC)',
   'Voter Registration Cancellation Letter',
   'Common Carry Declaration',
-  'UCC-1 Financing Statement preparation',
   'Notarization guidance and step-by-step instructions',
   'Public record filing instructions by jurisdiction',
-  'Certified mail templates for all required notices',
+  'Registered mail templates for all required notices',
   'Ongoing support through the full process',
 ];
 
@@ -172,7 +170,7 @@ export default function DFYPage() {
             </div>
             <div className={styles.heroCardDivider} />
             <ul className={styles.heroCardFeatures}>
-              {['Complete document preparation', 'Expert review & oversight', 'Notarization guidance', 'Filing & recording support', 'Certified mail templates', 'Post-completion support'].map(f => (
+              {['Complete document preparation', 'Expert review & oversight', 'Notarization guidance', 'Filing & recording support', 'Certified mail templates'].map(f => (
                 <li key={f} className={styles.heroCardFeature}>
                   <CheckIcon />
                   <span>{f}</span>
@@ -307,7 +305,7 @@ export default function DFYPage() {
             <div className={styles.testimonialsGrid}>
               {[
                 { initials: 'AG', name: 'Andrew Gray', location: 'Michigan', quote: "If you're ready to walk in a straight and deliberate line towards freedom, there's really only one person to work with — and you've found him. Consider yourself fortunate." },
-                { initials: 'JD', name: 'Jon Dowling', location: 'California', quote: 'Working with Titus was a seamless process — so fast and accurate. I loved having to do very little while he did all the heavy lifting. Highly recommend for expert guidance.' },
+                { initials: 'JD', name: 'Jon Dowling', location: 'California', quote: 'Working with ASN Consulting was a seamless process — so fast and accurate. I loved having to do very little while he did all the heavy lifting. Highly recommend for expert guidance.' },
                 { initials: 'MA', name: 'Mary Ann', location: 'Arizona', quote: "Excellent knowledge for people who don't have time to research themselves. This program gets you going quickly — and you can tell when someone has their heart in the right place." },
               ].map(t => (
                 <div key={t.initials} className={styles.testimonialCard}>
@@ -361,7 +359,7 @@ export default function DFYPage() {
               </h2>
               <p className={styles.finalCTASub}>
                 Book a free 20-minute discovery call. We will review your situation,
-                answer your questions, and tell you exactly what your process looks like.
+                answer your questions, and tell you exactly what the process looks like.
               </p>
               <a href="/services" className={styles.primaryBtn} style={{ marginTop: 8 }}>
                 Book Your Free Discovery Call
