@@ -205,7 +205,6 @@ export default function PrivateTrustsPage() {
 
         {/* ── 1. Hero ── */}
         <section className={styles.hero}>
-          <div className={styles.heroLeft}>
             <div className={styles.breadcrumb}>
               <a href="/">Home</a>
               <span>/</span>
@@ -254,30 +253,6 @@ export default function PrivateTrustsPage() {
                 <span>Immediate Asset Protection</span>
               </div>
             </div>
-          </div>
-
-          {/* Decorative rings */}
-          <div className={styles.heroRight}>
-            <div className={styles.ringsWrap}>
-              {/* Outer dashed ring */}
-              <svg className={styles.ringOuter} width="280" height="280" viewBox="0 0 280 280" fill="none">
-                <circle cx="140" cy="140" r="136" stroke="rgba(200,150,60,0.08)"
-                  strokeWidth="1" strokeDasharray="6 5" />
-              </svg>
-              {/* Middle ring */}
-              <svg className={styles.ringMiddle} width="210" height="210" viewBox="0 0 210 210" fill="none">
-                <circle cx="105" cy="105" r="101" stroke="rgba(200,150,60,0.12)"
-                  strokeWidth="1" strokeDasharray="4 6" />
-              </svg>
-              {/* Inner circle */}
-              <div className={styles.ringInner}>
-                <svg width="60" height="60" viewBox="0 0 24 24" fill="none"
-                  stroke="rgba(200,150,60,0.45)" strokeWidth="1" strokeLinecap="round">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                </svg>
-              </div>
-            </div>
-          </div>
         </section>
 
         {/* ── 2. What Is a Private Trust ── */}
