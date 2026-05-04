@@ -1,0 +1,741 @@
+/* ─── Shared widths ─── */
+.maxW {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+/* ─── Section header ─── */
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 52px;
+}
+
+.sectionH2 {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 34px;
+  font-weight: 300;
+  color: var(--cream);
+  line-height: 1.2;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.sectionSub {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.75;
+  max-width: 520px;
+  margin: 14px auto 0;
+  text-align: center;
+}
+
+/* ─── Body text ─── */
+.bodyText {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.85;
+  margin: 0;
+}
+
+/* ─── Buttons ─── */
+.primaryBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: var(--gold);
+  color: #0C0D11;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border-radius: 5px;
+  transition: background 0.18s, transform 0.15s;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.primaryBtn:hover {
+  background: var(--gold-hover);
+  transform: translateY(-2px);
+}
+
+.outlineBtn {
+  display: inline-flex;
+  align-items: center;
+  padding: 14px 22px;
+  background: transparent;
+  border: 1px solid rgba(200, 150, 60, 0.4);
+  color: var(--gold);
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border-radius: 5px;
+  transition: background 0.2s;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.outlineBtn:hover {
+  background: rgba(200, 150, 60, 0.1);
+}
+
+/* ─── Icon block ─── */
+.iconBlock {
+  width: 46px;
+  height: 46px;
+  border-radius: 9px;
+  background: rgba(200, 150, 60, 0.07);
+  border: 1px solid rgba(200, 150, 60, 0.16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ─── 1. Hero ─── */
+.hero {
+  background-color: var(--bg-primary);
+  background-image: radial-gradient(rgba(200, 150, 60, 0.055) 1px, transparent 1px);
+  background-size: 28px 28px;
+  padding: 80px 48px;
+}
+
+.heroInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  letter-spacing: 0.5px;
+}
+
+.breadcrumb a {
+  color: var(--text-muted);
+  transition: color 0.2s;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover { color: var(--gold); }
+
+.breadcrumb span { color: rgba(200, 150, 60, 0.45); }
+
+.heroH1 {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 50px;
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--cream);
+  margin-bottom: 20px;
+  margin-top: 4px;
+}
+
+.heroGold {
+  color: var(--gold);
+  font-style: italic;
+}
+
+.heroSub {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.8;
+  max-width: 600px;
+  margin: 0 auto 40px;
+}
+
+.heroStats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+}
+
+.heroStat {
+  text-align: center;
+}
+
+.heroStatNum {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 32px;
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1;
+}
+
+.heroStatLabel {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 5px;
+}
+
+.heroStatDivider {
+  width: 1px;
+  height: 36px;
+  background: rgba(200, 150, 60, 0.2);
+  flex-shrink: 0;
+}
+
+/* ─── 2. Mission ─── */
+.missionSection {
+  background: var(--bg-secondary);
+  padding: 80px 0;
+}
+
+.missionGrid {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 72px;
+  align-items: center;
+}
+
+.missionH2 {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 34px;
+  font-weight: 300;
+  color: var(--cream);
+  line-height: 1.2;
+  margin-bottom: 24px;
+}
+
+/* Blockquote card */
+.quoteCard {
+  background: var(--bg-card);
+  border: 1px solid rgba(200, 150, 60, 0.22);
+  border-radius: 12px;
+  padding: 36px;
+  position: relative;
+  overflow: hidden;
+}
+
+.quoteAccent {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, transparent, var(--gold), transparent);
+}
+
+.quoteMarks {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 72px;
+  font-weight: 300;
+  color: rgba(200, 150, 60, 0.2);
+  line-height: 0.8;
+  margin-bottom: 16px;
+}
+
+.quoteText {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 18px;
+  font-weight: 300;
+  color: var(--cream);
+  line-height: 1.65;
+  font-style: italic;
+  margin: 0;
+}
+
+.quoteAttribution {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-top: 20px;
+}
+
+/* ─── 3. Differentiators ─── */
+.differSection {
+  background: var(--bg-primary);
+  padding: 80px 0;
+}
+
+.differGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.differCard {
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  padding: 28px;
+  transition: border-color 0.28s, transform 0.25s;
+}
+
+.differCard:hover {
+  border-color: rgba(200, 150, 60, 0.35);
+  transform: translateY(-5px);
+}
+
+.differTitle {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--cream-muted);
+  margin-top: 14px;
+  margin-bottom: 8px;
+}
+
+.differBody {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ─── 4. Team ─── */
+.teamSection {
+  background: var(--bg-secondary);
+  padding: 80px 0;
+}
+
+.teamGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.teamCard {
+  background: var(--bg-card);
+  border: 1px solid rgba(200, 150, 60, 0.22);
+  border-radius: 12px;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.teamCardAccent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.teamAvatar {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: rgba(200, 150, 60, 0.1);
+  border: 2px solid rgba(200, 150, 60, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 28px;
+  color: var(--gold);
+}
+
+.teamName {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 22px;
+  font-weight: 300;
+  color: var(--cream);
+  margin-top: 16px;
+}
+
+.teamTitle {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-top: 6px;
+  line-height: 1.5;
+}
+
+.teamRule {
+  width: 40px;
+  height: 1px;
+  background: rgba(200, 150, 60, 0.3);
+  margin: 20px auto;
+}
+
+.teamBio {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin: 0;
+  text-align: center;
+}
+
+.teamDivider {
+  width: 100%;
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  margin: 24px 0;
+}
+
+.teamCTAs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* ─── 5. Values ─── */
+.valuesSection {
+  background: var(--bg-primary);
+  padding: 80px 0;
+}
+
+.valuesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.valueItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.valueBar {
+  width: 36px;
+  height: 2px;
+  background: var(--gold);
+  margin-bottom: 20px;
+}
+
+.valueTitle {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--cream);
+  margin-bottom: 10px;
+}
+
+.valueBody {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin: 0;
+}
+
+/* ─── 6. Social Proof ─── */
+.proofSection {
+  background: var(--bg-secondary);
+  padding: 56px 48px;
+}
+
+.testimonialsGrid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.testimonialCard {
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 26px;
+  transition: border-color 0.3s, transform 0.25s;
+}
+
+.testimonialCard:hover {
+  border-color: rgba(200, 150, 60, 0.25);
+  transform: translateY(-3px);
+}
+
+.testimonialFeatured {
+  border: 1px solid rgba(200, 150, 60, 0.18);
+}
+
+.tStars {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 14px;
+}
+
+.tQuote {
+  font-size: 13px;
+  font-style: italic;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin-bottom: 18px;
+}
+
+.tAuthor {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 14px;
+}
+
+.tAvatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(200, 150, 60, 0.1);
+  border: 1px solid rgba(200, 150, 60, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: var(--gold);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.tName {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--cream-muted);
+}
+
+.tLocation {
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+
+.proofMore {
+  text-align: center;
+  margin-top: 28px;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.proofMoreLink {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.proofMoreLink:hover {
+  color: var(--gold);
+}
+
+/* ─── 7. Location & Contact ─── */
+.locationSection {
+  background: var(--bg-primary);
+  padding: 48px;
+  border-top: 1px solid rgba(200, 150, 60, 0.1);
+}
+
+.locationInner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.locationLeft {
+  display: flex;
+  flex-direction: column;
+}
+
+.locationLabel {
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.locationCity {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 22px;
+  font-weight: 300;
+  color: var(--cream);
+  margin-top: 6px;
+}
+
+.locationEmail {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-decoration: none;
+  margin-top: 8px;
+  transition: color 0.2s;
+}
+
+.locationEmail:hover {
+  color: var(--gold);
+}
+
+.locationSocial {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.socialLink {
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(200, 150, 60, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.socialLink:hover {
+  background: rgba(200, 150, 60, 0.1);
+  border-color: rgba(200, 150, 60, 0.4);
+  color: var(--gold);
+}
+
+/* ─── 8. Final CTA Banner ─── */
+.ctaBanner {
+  background: var(--bg-card);
+  border-top: 1px solid rgba(200, 150, 60, 0.15);
+  border-bottom: 1px solid rgba(200, 150, 60, 0.15);
+  padding: 56px 48px;
+}
+
+.ctaBannerInner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.ctaLabel {
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+
+.ctaH3 {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 28px;
+  font-weight: 300;
+  color: var(--cream);
+  line-height: 1.2;
+  margin: 0 0 10px;
+}
+
+.ctaDesc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin: 0;
+  max-width: 420px;
+}
+
+.ctaRight {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .maxW {
+    padding: 0 24px;
+  }
+
+  .hero {
+    padding: 56px 24px;
+  }
+
+  .heroH1 {
+    font-size: 34px;
+  }
+
+  .heroStats {
+    gap: 24px;
+  }
+
+  .missionGrid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .missionH2 {
+    font-size: 26px;
+  }
+
+  .differGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .teamGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .valuesGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .proofSection {
+    padding: 48px 24px;
+  }
+
+  .testimonialsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .locationSection {
+    padding: 40px 24px;
+  }
+
+  .locationInner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .locationLeft {
+    align-items: center;
+  }
+
+  .ctaBanner {
+    padding: 48px 24px;
+  }
+
+  .ctaBannerInner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .ctaDesc {
+    max-width: 100%;
+  }
+
+  .ctaRight {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .sectionH2 {
+    font-size: 26px;
+  }
+}
