@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import SectionLabel from '../components/SectionLabel';
+import DFYCalculator from '../components/DFYCalculator';
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
@@ -269,6 +270,9 @@ export default function DFYPage() {
             </div>
           </div>
         </section>
+
+        {/* ── Pricing Calculator ── */}
+        <DFYCalculator />
 
         {/* ── Process / Timeline ── */}
         <section className={styles.processSection}>
