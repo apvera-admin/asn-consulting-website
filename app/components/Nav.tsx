@@ -1,6 +1,7 @@
 'use client';
 import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
+import { createClient } from '@/lib/supabase/client';
 import styles from './Nav.module.css';
 
 const diyPlans = [
@@ -18,6 +19,7 @@ const otherServices = [
 export default function Nav() {
   const [megaOpen, setMegaOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -33,6 +35,13 @@ export default function Nav() {
     };
     document.addEventListener('mousedown', handler);
     return () => document.removeEventListener('mousedown', handler);
+  }, []);
+
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      setIsLoggedIn(!!user);
+    });
   }, []);
 
   return (
@@ -161,6 +170,9 @@ export default function Nav() {
             <li><a href="/faqs">FAQs</a></li>
           </ul>
 
+          {isLoggedIn && (
+            <a href="/dashboard" className={styles.dashboardLink}>My Dashboard</a>
+          )}
           <a href="/services" className={styles.cta}>Book a Call</a>
 
           {/* Mobile hamburger */}
@@ -195,6 +207,9 @@ export default function Nav() {
         <a href="/blog" className={styles.mobileLink}>Blog</a>
         <a href="/faqs" className={styles.mobileLink}>FAQs</a>
         <a href="/services" className={styles.mobileCTA}>Book a Call</a>
+        {isLoggedIn && (
+          <a href="/dashboard" className={styles.mobileDashboardLink}>My Dashboard →</a>
+        )}
       </div>
     </nav>
   );

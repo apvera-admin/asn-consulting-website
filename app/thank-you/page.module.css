@@ -1,0 +1,120 @@
+.main {
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+  background-image: radial-gradient(rgba(200, 150, 60, 0.055) 1px, transparent 1px);
+  background-size: 28px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+}
+
+.card {
+  width: 100%;
+  max-width: 520px;
+  background: var(--bg-card);
+  border: 1px solid rgba(200, 150, 60, 0.12);
+  border-radius: 12px;
+  padding: 48px 40px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.cardAccent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.heading {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 36px;
+  font-weight: 300;
+  color: var(--cream);
+  margin: 0 0 12px;
+}
+
+.body {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin: 0 0 32px;
+}
+
+.btnGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.primaryBtn {
+  display: inline-block;
+  padding: 14px 36px;
+  background: var(--gold);
+  color: #0C0D11;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background 0.18s;
+}
+
+.primaryBtn:hover {
+  background: var(--gold-hover);
+}
+
+.outlineBtn {
+  display: inline-block;
+  padding: 12px 28px;
+  border: 1px solid rgba(200, 150, 60, 0.35);
+  border-radius: 5px;
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.18s;
+}
+
+.outlineBtn:hover {
+  background: rgba(200, 150, 60, 0.08);
+}
+
+.note {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 20px;
+}
+
+.noteLink {
+  color: var(--gold);
+  text-decoration: none;
+}
+
+.noteLink:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 40px 24px;
+  }
+
+  .heading {
+    font-size: 30px;
+  }
+}
