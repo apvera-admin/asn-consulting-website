@@ -1,0 +1,601 @@
+/* ─── Hero ─── */
+.hero {
+  background-color: var(--bg-primary);
+  background-image: radial-gradient(rgba(200, 150, 60, 0.055) 1px, transparent 1px);
+  background-size: 28px 28px;
+  padding: 80px 48px;
+}
+
+.heroInner {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.heroH1 {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 52px;
+  font-weight: 300;
+  line-height: 1.12;
+  color: var(--cream);
+  margin: 16px 0 20px;
+}
+
+.heroEm {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.heroSub {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.8;
+  max-width: 540px;
+  margin: 0 auto 32px;
+}
+
+.trustBadges {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.badge {
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.badgeDot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(200, 150, 60, 0.4);
+  flex-shrink: 0;
+}
+
+/* ─── Consultant Sections ─── */
+.consultantSection[data-bg='secondary'] {
+  background: var(--bg-secondary);
+  border-top: 1px solid rgba(200, 150, 60, 0.1);
+}
+
+.consultantSection[data-bg='primary'] {
+  background: var(--bg-primary);
+  border-top: 1px solid rgba(200, 150, 60, 0.08);
+}
+
+.consultantInner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 72px 48px;
+}
+
+.consultantHeader {
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+  margin-bottom: 48px;
+}
+
+.avatarRing {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border: 1.5px solid var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: rgba(200, 150, 60, 0.06);
+}
+
+.avatarInitials {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 1px;
+}
+
+.consultantInfo {
+  flex: 1;
+}
+
+.consultantName {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--cream);
+  letter-spacing: 0.3px;
+  margin-bottom: 4px;
+}
+
+.consultantRole {
+  font-size: 11px;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+
+.consultantBio {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.75;
+  max-width: 660px;
+  margin: 0;
+}
+
+/* ─── Booking Cards ─── */
+.cardsGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.bookingCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+  padding: 28px 32px;
+  border: 1px solid rgba(200, 150, 60, 0.12);
+  border-radius: 10px;
+  background: var(--bg-card);
+  transition: transform 0.22s ease, border-color 0.22s ease;
+}
+
+.bookingCard:hover {
+  transform: translateY(-3px);
+  border-color: rgba(200, 150, 60, 0.4);
+}
+
+.cardLeft {
+  flex: 1;
+}
+
+.cardBadge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.cardBadge[data-type='free'] {
+  background: rgba(107, 196, 126, 0.15);
+  color: #6BC47E;
+  border: 1px solid rgba(107, 196, 126, 0.3);
+}
+
+.cardBadge[data-type='paid'] {
+  background: rgba(200, 150, 60, 0.12);
+  color: var(--gold);
+  border: 1px solid rgba(200, 150, 60, 0.3);
+}
+
+.cardTitle {
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--cream);
+  margin: 0 0 10px;
+  line-height: 1.35;
+}
+
+.cardDesc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin: 0;
+  max-width: 560px;
+}
+
+.cardRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.cardMeta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.cardDuration {
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.cardPrice {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--cream);
+  letter-spacing: -0.5px;
+}
+
+.bookBtn {
+  display: inline-block;
+  padding: 10px 22px;
+  background: var(--gold);
+  color: #0C0D11;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: 5px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.18s ease;
+}
+
+.bookBtn:hover {
+  background: var(--gold-hover);
+}
+
+/* ─── Not Sure Strip ─── */
+.notSureStrip {
+  background: rgba(200, 150, 60, 0.06);
+  border-top: 1px solid rgba(200, 150, 60, 0.12);
+  border-bottom: 1px solid rgba(200, 150, 60, 0.12);
+  padding: 20px 48px;
+}
+
+.notSureInner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.notSureText {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.notSureLink {
+  font-size: 13px;
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.notSureLink:hover {
+  color: var(--gold-hover);
+}
+
+/* ─── How It Works ─── */
+.howSection {
+  background: var(--bg-secondary);
+  border-top: 1px solid rgba(200, 150, 60, 0.08);
+  padding: 80px 48px;
+}
+
+.howInner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.howHeader {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.howH2 {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 36px;
+  font-weight: 300;
+  color: var(--cream);
+  margin: 12px 0 0;
+}
+
+.stepsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+}
+
+.stepTop {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.stepNum {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.5px solid var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gold);
+  flex-shrink: 0;
+  background: rgba(200, 150, 60, 0.06);
+}
+
+.stepLine {
+  flex: 1;
+  height: 1px;
+  background: rgba(200, 150, 60, 0.2);
+  margin-left: 12px;
+}
+
+.stepTitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--cream);
+  margin: 0 0 10px;
+}
+
+.stepDesc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ─── FAQ ─── */
+.faqSection {
+  background: var(--bg-primary);
+  border-top: 1px solid rgba(200, 150, 60, 0.08);
+  padding: 80px 48px;
+}
+
+.faqInner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.faqHeader {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.faqH2 {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 36px;
+  font-weight: 300;
+  color: var(--cream);
+  margin: 12px 0 0;
+}
+
+.faqGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+}
+
+.faqItem {
+  padding: 28px 32px;
+  border: 1px solid rgba(200, 150, 60, 0.1);
+  border-radius: 8px;
+  background: var(--bg-card);
+}
+
+.faqQ {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--cream);
+  margin: 0 0 12px;
+  line-height: 1.4;
+}
+
+.faqA {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin: 0;
+}
+
+/* ─── CTA Banner ─── */
+.ctaBanner {
+  background: var(--bg-secondary);
+  border-top: 1px solid rgba(200, 150, 60, 0.15);
+  padding: 56px 48px;
+}
+
+.ctaInner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.ctaLabel {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.ctaH3 {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 24px;
+  font-weight: 300;
+  color: var(--cream);
+  margin: 0;
+  max-width: 440px;
+}
+
+.ctaRight {
+  display: flex;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+.primaryBtn {
+  display: inline-block;
+  padding: 13px 28px;
+  background: var(--gold);
+  color: #0C0D11;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background 0.18s ease;
+  white-space: nowrap;
+}
+
+.primaryBtn:hover {
+  background: var(--gold-hover);
+}
+
+.outlineBtn {
+  display: inline-block;
+  padding: 13px 28px;
+  background: transparent;
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  border: 1px solid rgba(200, 150, 60, 0.4);
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background 0.18s ease, border-color 0.18s ease;
+  white-space: nowrap;
+}
+
+.outlineBtn:hover {
+  background: rgba(200, 150, 60, 0.08);
+  border-color: rgba(200, 150, 60, 0.6);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 900px) {
+  .stepsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stepLine {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .consultantHeader {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .faqGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .ctaInner {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  .ctaH3 {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding: 56px 24px;
+  }
+
+  .heroH1 {
+    font-size: 36px;
+  }
+
+  .consultantInner {
+    padding: 56px 24px;
+  }
+
+  .bookingCard {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .cardRight {
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .cardMeta {
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .bookBtn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .notSureStrip {
+    padding: 20px 24px;
+  }
+
+  .howSection {
+    padding: 56px 24px;
+  }
+
+  .faqSection {
+    padding: 56px 24px;
+  }
+
+  .ctaBanner {
+    padding: 48px 24px;
+  }
+
+  .ctaRight {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .primaryBtn,
+  .outlineBtn {
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .stepsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .trustBadges {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .badgeDot {
+    display: none;
+  }
+}
