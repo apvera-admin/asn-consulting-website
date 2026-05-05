@@ -18,7 +18,7 @@ const titusCards = [
       'A complimentary introductory call to discuss your situation, learn about the status correction process, and find out if our services are the right fit for you.',
     duration: '15 min',
     price: 'Free',
-    link: 'https://cal.com/asn-consulting/status-correction-strategy',
+    link: 'https://cal.com/titus-osborne-glolma/status-correction-call',
   },
   {
     badge: 'Paid',
