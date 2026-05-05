@@ -27,7 +27,7 @@ const titusCards = [
       'A deep-dive session with Titus covering the legal foundations of status correction, sovereignty principles, and how to apply them to your specific circumstances.',
     duration: '30 min',
     price: '$75',
-    link: 'https://cal.com/asn-consulting/educational-consulting',
+    link: 'https://cal.com/titus-osborne-glolma/educational-consulting',
   },
 ];
 
