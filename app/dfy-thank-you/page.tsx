@@ -379,6 +379,10 @@ export default function DFYThankYouPage() {
                 >
                   {hhaLoading ? 'Recording...' : 'I Agree — Proceed to Intake Form →'}
                 </button>
+                <p className={styles.returnNote}>
+                  Can&apos;t finish right now? No problem — check your email for a link to return
+                  to this page at any time.
+                </p>
               </form>
             </div>
           )}

@@ -59,8 +59,9 @@ export async function POST(req: NextRequest) {
               <p style="color: #C8963C; font-weight: 600; margin-bottom: 8px;">Step 1 — Sign your Hold Harmless Agreement</p>
               <p style="color: #8A8070; line-height: 1.75; margin-bottom: 20px;">This is required before we begin preparing your documents.</p>
               <p style="color: #C8963C; font-weight: 600; margin-bottom: 8px;">Step 2 — Complete your intake form</p>
-              <p style="color: #8A8070; line-height: 1.75; margin-bottom: 28px;">This gives us all the information we need to prepare your documents correctly.</p>
-              <a href="${process.env.NEXT_PUBLIC_SITE_URL}/dfy-thank-you" style="display: inline-block; padding: 14px 28px; background: #C8963C; color: #0C0D11; font-weight: 700; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; border-radius: 5px; text-decoration: none;">Get Started Now</a>
+              <p style="color: #8A8070; line-height: 1.75; margin-bottom: 16px;">This gives us all the information we need to prepare your documents correctly.</p>
+              <p style="color: #8A8070; line-height: 1.75; margin-bottom: 28px;">This link is yours to keep. If you close the page or get interrupted, you can return to it at any time using the button below — your progress is saved automatically.</p>
+              <a href="${process.env.NEXT_PUBLIC_SITE_URL}/dfy-intake?email=${encodeURIComponent(customerEmail)}" style="display: inline-block; padding: 14px 28px; background: #C8963C; color: #0C0D11; font-weight: 700; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; border-radius: 5px; text-decoration: none;">Get Started Now</a>
               <p style="color: #8A8070; font-size: 12px; margin-top: 32px;">Questions? Email us at support@asnconsulting.co</p>
             </div>
           `,
@@ -68,6 +69,14 @@ export async function POST(req: NextRequest) {
       });
     }
   }
+
+  // TODO: Set up a Supabase Edge Function or Vercel Cron job that runs daily
+  // and sends a reminder email to any DFY client who purchased more than 24 hours ago
+  // but has not submitted their intake form.
+  // Query: SELECT email FROM profiles WHERE plan_tier = 'dfy'
+  //        AND plan_purchased_at < NOW() - INTERVAL '24 hours'
+  //        AND NOT EXISTS (SELECT 1 FROM dfy_intake_submissions WHERE client_email = email)
+  // Then send a reminder via Resend with their /dfy-intake?email= link
 
   return NextResponse.json({ received: true });
 }

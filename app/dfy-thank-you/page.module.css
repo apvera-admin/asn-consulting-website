@@ -418,6 +418,15 @@
   margin-bottom: 12px;
 }
 
+.returnNote {
+  font-size: 11px;
+  font-style: italic;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 12px;
+  line-height: 1.5;
+}
+
 /* ─── Success state ─── */
 .successCard {
   text-align: center;

@@ -1,0 +1,61 @@
+/* ─── Loading state ─── */
+.loadingState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px;
+  gap: 16px;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid rgba(200, 150, 60, 0.2);
+  border-top-color: var(--gold);
+  animation: spin 1s linear infinite;
+}
+
+.loadingText {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* ─── Already submitted state ─── */
+.alreadyDone {
+  text-align: center;
+  padding: 56px 40px;
+}
+
+.alreadyDoneIcon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.alreadyDoneH2 {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 26px;
+  font-weight: 300;
+  color: var(--cream);
+  margin: 0 0 14px;
+}
+
+.alreadyDonePara {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.75;
+  max-width: 480px;
+  margin: 0 auto 8px;
+}
+
+.alreadyDoneLink {
+  font-size: 13px;
+  color: var(--gold);
+  text-decoration: none;
+}
+
+.alreadyDoneLink:hover {
+  text-decoration: underline;
+}
