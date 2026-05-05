@@ -95,7 +95,7 @@ const plans = [
     price: '297',
     tagline: 'Solo made simple — every tool you need, self-guided.',
     features: individualFeatures,
-    href: 'https://buy.stripe.com/placeholder-individual',
+    href: 'https://buy.stripe.com/00wdR9f2e49bfFg7df97G0t',
     popular: false,
   },
   {
@@ -105,7 +105,7 @@ const plans = [
     price: '597',
     tagline: 'Complete tools for two, plus email/text support and a guiding phone call.',
     features: partnerFeatures,
-    href: 'https://buy.stripe.com/placeholder-partner',
+    href: 'https://buy.stripe.com/8x28wPdYacFH50CeFH97G0u',
     popular: true,
   },
   {
@@ -115,7 +115,7 @@ const plans = [
     price: '997',
     tagline: 'Tools for the whole family — videos, unlimited support, and phone call included.',
     features: familyFeatures,
-    href: 'https://buy.stripe.com/placeholder-family',
+    href: 'https://buy.stripe.com/fZudR99HU7lnct4apr97G0v',
     popular: false,
   },
   {
@@ -125,7 +125,7 @@ const plans = [
     price: '397',
     tagline: 'ROE document generator — instructional videos available separately.',
     features: roeFeatures,
-    href: 'https://buy.stripe.com/placeholder-roe',
+    href: 'https://buy.stripe.com/8wMeYM7m68P28F2aEH',
     popular: false,
   },
 ];
