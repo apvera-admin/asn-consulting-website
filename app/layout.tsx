@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description:
     'Expert guidance on American State National status correction, private trust formation, and tax consulting. Chattanooga, Tennessee.',
     icons: {
-    icon: '/favicon.png',
+       icon: '/favicon.ico',
  },
 };
 
