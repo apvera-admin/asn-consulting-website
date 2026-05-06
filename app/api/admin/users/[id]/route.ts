@@ -9,12 +9,13 @@ function checkAdminKey(req: NextRequest) {
 
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   if (!checkAdminKey(req)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
+  const { id } = await params;
   const body = await req.json().catch(() => null);
   if (!body) {
     return NextResponse.json({ error: 'Invalid body' }, { status: 400 });
@@ -38,7 +39,7 @@ export async function PATCH(
   const { data, error } = await adminClient
     .from('profiles')
     .update(update)
-    .eq('id', params.id)
+    .eq('id', id)
     .select(
       'id, email, full_name, plan_tier, purchased_services, submission_limit_override, submissions_used, plan_purchased_at, hha_signed'
     )
