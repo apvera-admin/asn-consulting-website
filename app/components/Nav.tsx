@@ -170,8 +170,10 @@ export default function Nav() {
             <li><a href="/faqs">FAQs</a></li>
           </ul>
 
-          {isLoggedIn && (
+          {isLoggedIn ? (
             <a href="/dashboard" className={styles.dashboardLink}>My Dashboard</a>
+          ) : (
+            <a href="/login" className={styles.dashboardLink}>Member Login</a>
           )}
           <a href="/services" className={styles.cta}>Book a Call</a>
 
@@ -207,8 +209,10 @@ export default function Nav() {
         <a href="/blog" className={styles.mobileLink}>Blog</a>
         <a href="/faqs" className={styles.mobileLink}>FAQs</a>
         <a href="/services" className={styles.mobileCTA}>Book a Call</a>
-        {isLoggedIn && (
+        {isLoggedIn ? (
           <a href="/dashboard" className={styles.mobileDashboardLink}>My Dashboard →</a>
+        ) : (
+          <a href="/login" className={styles.mobileDashboardLink}>Member Login →</a>
         )}
       </div>
     </nav>
