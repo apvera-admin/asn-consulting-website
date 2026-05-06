@@ -73,7 +73,7 @@ create trigger on_auth_user_created
 -- Run this in Supabase SQL editor if the table already exists
 -- ============================================================
 alter table public.profiles
-  add column if not exists purchased_services text[] default null,
+  add column if not exists purchased_services text[] default '{}',
   add column if not exists submission_limit_override integer default null;
 
 -- Backfill purchased_services for existing users based on plan_tier

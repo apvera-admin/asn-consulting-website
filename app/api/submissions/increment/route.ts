@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
 
   const { data: profile } = await adminClient
     .from('profiles')
-    .select('plan_tier, submissions_used')
+    .select('plan_tier, submissions_used, submission_limit_override')
     .eq('id', user.id)
     .single();
 
@@ -29,7 +29,10 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'No active plan found' }, { status: 403 });
   }
 
-  const limit = SUBMISSION_LIMITS[profile.plan_tier] ?? 0;
+  const limit =
+    (profile as { submission_limit_override?: number | null }).submission_limit_override ??
+    SUBMISSION_LIMITS[profile.plan_tier] ??
+    0;
   if (profile.submissions_used >= limit) {
     return NextResponse.json({ error: 'Submission limit reached' }, { status: 403 });
   }

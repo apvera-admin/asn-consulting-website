@@ -1,0 +1,450 @@
+.page {
+  min-height: 100vh;
+  background: var(--bg-primary);
+  padding: 0;
+}
+
+/* ── Warning banner ── */
+.warningBanner {
+  background: rgba(224, 90, 90, 0.12);
+  border-bottom: 1px solid rgba(224, 90, 90, 0.3);
+  padding: 10px 24px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #E05A5A;
+}
+
+/* ── Password gate ── */
+.gate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 24px;
+}
+
+.gateCard {
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  padding: 40px 36px;
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.gateHeading {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 22px;
+  font-weight: 300;
+  color: var(--cream);
+  margin: 0;
+}
+
+.gateSub {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin: -12px 0 0;
+}
+
+.gateInput {
+  width: 100%;
+  padding: 10px 14px;
+  background: var(--bg-secondary);
+  border: 1px solid rgba(200, 150, 60, 0.2);
+  border-radius: 5px;
+  color: var(--cream);
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.18s;
+  box-sizing: border-box;
+}
+
+.gateInput:focus {
+  border-color: rgba(200, 150, 60, 0.5);
+}
+
+.gateInput.error {
+  border-color: rgba(224, 90, 90, 0.5);
+}
+
+.gateBtn {
+  padding: 11px 24px;
+  background: var(--gold);
+  color: #0C0D11;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.18s;
+  align-self: flex-start;
+}
+
+.gateBtn:hover:not(:disabled) {
+  background: var(--gold-hover);
+}
+
+.gateBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.gateError {
+  font-size: 12px;
+  color: #E05A5A;
+  margin: -12px 0 0;
+}
+
+/* ── Main layout ── */
+.main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 36px 32px;
+}
+
+.topRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.adminHeading {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 24px;
+  font-weight: 300;
+  color: var(--cream);
+  margin: 0;
+}
+
+.logoutBtn {
+  padding: 7px 16px;
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.logoutBtn:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+  color: var(--cream-muted);
+}
+
+/* ── Search ── */
+.searchRow {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.searchInput {
+  flex: 1;
+  padding: 10px 14px;
+  background: var(--bg-secondary);
+  border: 1px solid rgba(200, 150, 60, 0.2);
+  border-radius: 5px;
+  color: var(--cream);
+  font-size: 13px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.18s;
+}
+
+.searchInput:focus {
+  border-color: rgba(200, 150, 60, 0.5);
+}
+
+.searchInput::placeholder {
+  color: var(--text-muted);
+}
+
+.searching {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-bottom: 16px;
+}
+
+.noResults {
+  font-size: 13px;
+  color: var(--text-muted);
+  padding: 20px 0;
+}
+
+/* ── User card ── */
+.userCard {
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 8px;
+  padding: 22px 24px;
+  margin-bottom: 16px;
+}
+
+.cardTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.cardEmail {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--cream);
+  word-break: break-all;
+}
+
+.cardName {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.cardMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.badgePlan {
+  background: rgba(200, 150, 60, 0.1);
+  border: 1px solid rgba(200, 150, 60, 0.25);
+  color: var(--gold);
+}
+
+.badgeService {
+  background: rgba(107, 196, 126, 0.08);
+  border: 1px solid rgba(107, 196, 126, 0.2);
+  color: #6BC47E;
+  cursor: default;
+}
+
+.badgeRemoveBtn {
+  background: none;
+  border: none;
+  color: rgba(107, 196, 126, 0.5);
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  font-size: 12px;
+  transition: color 0.15s;
+}
+
+.badgeRemoveBtn:hover {
+  color: #E05A5A;
+}
+
+.badgeHha {
+  background: rgba(107, 196, 126, 0.08);
+  border: 1px solid rgba(107, 196, 126, 0.2);
+  color: #6BC47E;
+}
+
+.badgeHhaNo {
+  background: rgba(224, 90, 90, 0.07);
+  border: 1px solid rgba(224, 90, 90, 0.2);
+  color: #E05A5A;
+}
+
+.subCount {
+  font-size: 11px;
+  color: var(--text-muted);
+  padding: 3px 9px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 4px;
+}
+
+.subCountWarning {
+  color: #D4A84A;
+  border-color: rgba(212, 168, 74, 0.25);
+}
+
+.purchasedDate {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ── Divider ── */
+.divider {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  margin: 16px 0;
+}
+
+/* ── Actions grid ── */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.actionGroup {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.actionLabel {
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.actionInput {
+  width: 72px;
+  padding: 6px 8px;
+  background: var(--bg-secondary);
+  border: 1px solid rgba(200, 150, 60, 0.18);
+  border-radius: 4px;
+  color: var(--cream);
+  font-size: 12px;
+  font-family: inherit;
+  outline: none;
+  text-align: center;
+  transition: border-color 0.15s;
+}
+
+.actionInput:focus {
+  border-color: rgba(200, 150, 60, 0.5);
+}
+
+.actionSelect {
+  padding: 6px 8px;
+  background: var(--bg-secondary);
+  border: 1px solid rgba(200, 150, 60, 0.18);
+  border-radius: 4px;
+  color: var(--cream);
+  font-size: 12px;
+  font-family: inherit;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  transition: border-color 0.15s;
+}
+
+.actionSelect:focus {
+  border-color: rgba(200, 150, 60, 0.5);
+}
+
+.actionSelect option {
+  background: var(--bg-secondary);
+}
+
+/* Button variants */
+.btn {
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: opacity 0.15s, background 0.15s;
+  white-space: nowrap;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btnGold {
+  background: rgba(200, 150, 60, 0.15);
+  border: 1px solid rgba(200, 150, 60, 0.3);
+  color: var(--gold);
+}
+
+.btnGold:hover:not(:disabled) {
+  background: rgba(200, 150, 60, 0.25);
+}
+
+.btnRed {
+  background: rgba(224, 90, 90, 0.1);
+  border: 1px solid rgba(224, 90, 90, 0.25);
+  color: #E05A5A;
+}
+
+.btnRed:hover:not(:disabled) {
+  background: rgba(224, 90, 90, 0.18);
+}
+
+.btnGreen {
+  background: rgba(107, 196, 126, 0.1);
+  border: 1px solid rgba(107, 196, 126, 0.25);
+  color: #6BC47E;
+}
+
+.btnGreen:hover:not(:disabled) {
+  background: rgba(107, 196, 126, 0.18);
+}
+
+/* ── Inline feedback ── */
+.cardFeedback {
+  font-size: 11px;
+  margin-top: 10px;
+  padding: 6px 10px;
+  border-radius: 4px;
+}
+
+.feedbackOk {
+  background: rgba(107, 196, 126, 0.08);
+  color: #6BC47E;
+  border: 1px solid rgba(107, 196, 126, 0.2);
+}
+
+.feedbackErr {
+  background: rgba(224, 90, 90, 0.08);
+  color: #E05A5A;
+  border: 1px solid rgba(224, 90, 90, 0.2);
+}
+
+@media (max-width: 640px) {
+  .main {
+    padding: 20px 16px;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .actionGroup {
+    flex-wrap: wrap;
+  }
+}
