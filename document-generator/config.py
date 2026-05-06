@@ -1,5 +1,6 @@
 """
 Configuration for ASN Document Generator.
+Works locally and on Railway.
 """
 import os
 
@@ -9,11 +10,13 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # Template directory (Word .docx templates)
 TEMPLATE_DIR = os.path.join(BASE_DIR, "document_templates")
 
-# Output directory (completed documents go here)
-OUTPUT_DIR = os.path.join(BASE_DIR, "completed_documents")
+# Output directory — use /tmp on Railway (ephemeral), local folder otherwise
+OUTPUT_DIR = os.environ.get("OUTPUT_DIR", os.path.join(BASE_DIR, "completed_documents"))
 
 # Reference data
-STATE_ABBREVIATIONS_PATH = os.path.join(BASE_DIR, "reference_data", "state_abbreviations.json")
+STATE_ABBREVIATIONS_PATH = os.path.join(
+    BASE_DIR, "reference_data", "state_abbreviations.json"
+)
 
 # Required template filenames
 REQUIRED_TEMPLATES = [
@@ -32,8 +35,8 @@ REQUIRED_TEMPLATES = [
     "ROE Testimony - WOMAN (Business Version).docx",
 ]
 
-# Flask settings
-SECRET_KEY = "asn-doc-gen-local-2026"
-DEBUG = False
-PORT = 5000
-HOST = "127.0.0.1"
+# Flask / server settings
+SECRET_KEY = os.environ.get("SECRET_KEY", "asn-doc-gen-local-2026")
+DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
+PORT = int(os.environ.get("PORT", 5000))
+HOST = "0.0.0.0"  # Must be 0.0.0.0 for Railway — not 127.0.0.1

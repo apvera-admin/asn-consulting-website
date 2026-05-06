@@ -1,0 +1,21 @@
+# Never commit completed documents — contains real client data
+completed_documents/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Local environment
+.env
+*.log
+
+# Windows batch files
+*.bat
+
+# Virtual environments
+venv/
+env/
+.venv/
