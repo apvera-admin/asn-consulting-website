@@ -58,6 +58,20 @@ def get_mapping(ctx: dict) -> dict:
     m["Currentyear"]                     = c["current_year"] + "."
     m["CurretnYear"]                     = c["current_year"] + "."
     m["currentyear"]                     = c["current_year"]
+    # Additional year tag variants (pages 8-10 and other templates)
+    m["CurrentYear"]                     = c["current_year"]
+    m["Year"]                            = c["current_year"]
+    m["year"]                            = c["current_year"]
+    m["YEAR"]                            = c["current_year"]
+    m["page8_year"]                      = c["current_year"]
+    m["page8_Year"]                      = c["current_year"]
+    m["page8_YEAR"]                      = c["current_year"]
+    m["page9_year"]                      = c["current_year"]
+    m["page9_Year"]                      = c["current_year"]
+    m["page9_YEAR"]                      = c["current_year"]
+    m["page10_year"]                     = c["current_year"]
+    m["page10_Year"]                     = c["current_year"]
+    m["page10_YEAR"]                     = c["current_year"]
     m["Month"]                           = c["current_month"]
     m["Monthcorr"]                       = c["current_month"]
     m["DState"]                          = c["current_state"]
@@ -231,8 +245,14 @@ def get_mapping(ctx: dict) -> dict:
 COMMON_PLACEHOLDER_MAP = {
     # ---- Month / Year ----
     "Month":                        "current_month",
-    "2022":                         "current_year",
+    "2019":                         "current_year",
+    "2020":                         "current_year",
     "2021":                         "current_year",
+    "2022":                         "current_year",
+    "2023":                         "current_year",
+    "2024":                         "current_year",
+    "2025":                         "current_year",
+    "2026":                         "current_year",
     "April":                        "current_month",   # hardcoded month in Master 928
 
     # ---- Gender / pronouns ----

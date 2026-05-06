@@ -41,6 +41,8 @@ interface FormData {
   include_roe: string;
   business_roe: string;
   has_political_status: string;
+  // Photo (for ROE Testimony pages 14-15)
+  photo_base64: string;
 }
 
 const EMPTY: FormData = {
@@ -53,6 +55,7 @@ const EMPTY: FormData = {
   parents_married: '', parents_wedding_date: '', parents_wedding_location: '',
   state_identity: '', ssn: '',
   include_roe: '', business_roe: 'No', has_political_status: 'Yes',
+  photo_base64: '',
 };
 
 export default function GeneratePage() {
@@ -65,6 +68,16 @@ export default function GeneratePage() {
   function set(field: keyof FormData) {
     return (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
       setForm(f => ({ ...f, [field]: e.target.value }));
+  }
+
+  function handlePhotoChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      setForm(f => ({ ...f, photo_base64: reader.result as string }));
+    };
+    reader.readAsDataURL(file);
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -352,13 +365,29 @@ export default function GeneratePage() {
               </select>
             </div>
             {form.include_roe === 'Yes' && (
-              <div className={styles.fieldGroup}>
-                <label className={styles.label}>Business ROE Version?</label>
-                <select className={styles.select} value={form.business_roe} onChange={set('business_roe')}>
-                  <option value="No">No (Standard)</option>
-                  <option value="Yes">Yes (Business)</option>
-                </select>
-              </div>
+              <>
+                <div className={styles.fieldGroup}>
+                  <label className={styles.label}>Business ROE Version?</label>
+                  <select className={styles.select} value={form.business_roe} onChange={set('business_roe')}>
+                    <option value="No">No (Standard)</option>
+                    <option value="Yes">Yes (Business)</option>
+                  </select>
+                </div>
+                <div className={`${styles.fieldGroup} ${styles.gridFull}`}>
+                  <label className={styles.label}>Witness Testimony Photo <span className={styles.req}>*</span></label>
+                  <input
+                    className={styles.input}
+                    type="file"
+                    accept="image/jpeg,image/png,image/jpg"
+                    onChange={handlePhotoChange}
+                    style={{ paddingTop: '7px', paddingBottom: '7px' }}
+                  />
+                  <span className={styles.hint}>JPG or PNG — appears on pages 14 &amp; 15 of the ROE Testimony document.</span>
+                  {form.photo_base64 && (
+                    <span className={styles.hint} style={{ color: 'var(--gold)' }}>Photo selected.</span>
+                  )}
+                </div>
+              </>
             )}
             <div className={styles.fieldGroup}>
               <label className={styles.label}>Include Political Status Documents?</label>

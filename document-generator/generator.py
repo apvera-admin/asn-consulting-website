@@ -6,6 +6,7 @@ word/document.xml (and header/footer XML parts), apply only targeted
 in-place text-node updates to SDT content controls, and repack — without
 ever calling python-docx Document.save(), which strips content Word needs.
 """
+import base64
 import io
 import logging
 import os
@@ -20,9 +21,11 @@ from utils import build_context
 
 logger = logging.getLogger(__name__)
 
-# Word XML namespace
+# Word XML namespaces
 W         = "http://schemas.openxmlformats.org/wordprocessingml/2006/main"
 XML_SPACE = "{http://www.w3.org/XML/1998/namespace}space"
+A_NS      = "http://schemas.openxmlformats.org/drawingml/2006/main"
+R_NS      = "http://schemas.openxmlformats.org/officeDocument/2006/relationships"
 
 # XML parts inside the ZIP that may contain SDTs and need patching
 _PATCH_PARTS = {
@@ -115,6 +118,41 @@ def _replace_text_in_sdt(sdt_el, new_text: str) -> bool:
         t.attrib.pop(XML_SPACE, None)
 
     return True
+
+
+# ---------------------------------------------------------------------------
+# Photo / image helpers
+# ---------------------------------------------------------------------------
+
+def _get_image_rids(xml_bytes: bytes, image_tag_names: set) -> list:
+    """Return rId strings from <a:blip> elements inside picture SDTs whose tag matches."""
+    root = etree.fromstring(xml_bytes)
+    rids = []
+    for sdt in root.iter(f"{{{W}}}sdt"):
+        tag = _sdt_tag(sdt)
+        if tag in image_tag_names:
+            for blip in sdt.iter(f"{{{A_NS}}}blip"):
+                rid = blip.get(f"{{{R_NS}}}embed")
+                if rid:
+                    rids.append(rid)
+    return rids
+
+
+def _parse_rels(rels_bytes: bytes) -> dict:
+    """Parse word/_rels/document.xml.rels, return {rId: path_in_zip} mapping."""
+    root = etree.fromstring(rels_bytes)
+    result = {}
+    for rel in root:
+        rid = rel.get("Id", "")
+        target = rel.get("Target", "")
+        if rid and target:
+            # Target is relative to word/; build the full ZIP path
+            if target.startswith("/"):
+                full_path = target.lstrip("/")
+            else:
+                full_path = f"word/{target}"
+            result[rid] = full_path
+    return result
 
 
 # ---------------------------------------------------------------------------
@@ -239,16 +277,35 @@ def _apply_roe_state_replacement(root, ctx: dict):
 def generate_document(template_path: str, output_path: str,
                        tag_map: dict, ctx: dict,
                        no_political_status: bool = False,
-                       roe_100_reasons: bool = False) -> list:
+                       roe_100_reasons: bool = False,
+                       photo_bytes: bytes = None) -> list:
     """
     Generate one document by:
       1. Copying the template ZIP entry-by-entry
       2. Patching only the XML parts that contain SDTs
-      3. Writing the result to output_path
+      3. Optionally replacing picture SDT images with photo_bytes
+      4. Writing the result to output_path
     No python-docx Document.save() is used, so nothing is ever stripped.
     """
     warnings = []
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
+
+    # Pre-scan: discover which media paths to replace when photo provided
+    media_paths_to_replace = set()
+    if photo_bytes:
+        try:
+            with zipfile.ZipFile(template_path, "r") as zin:
+                doc_xml = zin.read("word/document.xml")
+                rids = _get_image_rids(doc_xml, _SKIP_IMAGE_TAGS)
+                if rids:
+                    rels_bytes = zin.read("word/_rels/document.xml.rels")
+                    rels_map = _parse_rels(rels_bytes)
+                    for rid in rids:
+                        path = rels_map.get(rid)
+                        if path:
+                            media_paths_to_replace.add(path)
+        except Exception as exc:
+            warnings.append(f"Photo pre-scan warning: {exc}")
 
     try:
         with zipfile.ZipFile(template_path, "r") as zin, \
@@ -258,7 +315,11 @@ def generate_document(template_path: str, output_path: str,
             for item in zin.infolist():
                 data = zin.read(item.filename)
 
-                if item.filename in _PATCH_PARTS:
+                # Replace photo bytes for matched media files
+                if photo_bytes and item.filename in media_paths_to_replace:
+                    data = photo_bytes
+
+                elif item.filename in _PATCH_PARTS:
                     try:
                         data = _patch_xml_part(data, tag_map, ctx)
                         # Post-processing: political-status removal for Cover Letters
@@ -418,8 +479,22 @@ def generate_all_documents(form_data: dict) -> dict:
                 "label":    "ROE Testimony",
                 "template": tpl(test_tpl),
                 "output":   out("ROE Testimony"),
+                "photo":    True,
             },
         ]
+
+    # ------------------------------------------------------------------
+    # Decode photo (used by ROE Testimony pages 14-15)
+    # ------------------------------------------------------------------
+    photo_bytes = None
+    photo_b64 = form_data.get("photo_base64", "")
+    if photo_b64:
+        try:
+            if "," in photo_b64:
+                photo_b64 = photo_b64.split(",", 1)[1]
+            photo_bytes = base64.b64decode(photo_b64)
+        except Exception:
+            logger.warning("Failed to decode photo_base64")
 
     # ------------------------------------------------------------------
     # Execute all jobs
@@ -446,6 +521,7 @@ def generate_all_documents(form_data: dict) -> dict:
                 ctx                 = job_ctx,
                 no_political_status = job.get("no_pol",   False),
                 roe_100_reasons     = job.get("roe_100",  False),
+                photo_bytes         = photo_bytes if job.get("photo") else None,
             )
             warnings_all.extend(warns)
             files_generated.append(os.path.basename(out_path))
