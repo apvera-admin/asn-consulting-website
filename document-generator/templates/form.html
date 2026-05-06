@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ASN Consulting — Document Generator</title>
+  <link rel="stylesheet" href="/static/style.css"/>
+</head>
+<body>
+
+<!-- Loading overlay -->
+<div id="loading-overlay" style="display:none;">
+  <div class="spinner-box">
+    <div class="spinner"></div>
+    <p>Generating documents…<br><small>This may take 20–30 seconds.</small></p>
+  </div>
+</div>
+
+<!-- Success modal -->
+<div id="success-modal" style="display:none;">
+  <div class="modal-box">
+    <div class="modal-icon success-icon">&#10003;</div>
+    <h2>Documents Generated!</h2>
+    <p id="success-client-name"></p>
+    <ul id="success-file-list"></ul>
+    <div class="modal-actions">
+      <button class="btn btn-primary" onclick="openFolder()">Open Folder</button>
+      <button class="btn btn-secondary" onclick="resetForm()">Generate Another</button>
+    </div>
+  </div>
+</div>
+
+<!-- Error modal -->
+<div id="error-modal" style="display:none;">
+  <div class="modal-box">
+    <div class="modal-icon error-icon">&#9888;</div>
+    <h2>Something Went Wrong</h2>
+    <p id="error-message"></p>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeModal('error-modal')">Try Again</button>
+    </div>
+  </div>
+</div>
+
+<div class="page-wrapper">
+
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="logo-area">
+        <span class="logo-text">ASN</span>
+        <span class="logo-sub">Consulting</span>
+      </div>
+      <div class="header-title">
+        <h1>Document Generator</h1>
+        <p>Internal Use Only</p>
+      </div>
+    </div>
+  </header>
+
+  {% if startup_issues %}
+  <div class="alert alert-warning">
+    <strong>Warning:</strong>
+    <ul>
+      {% for issue in startup_issues %}<li>{{ issue }}</li>{% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  <!-- Main form -->
+  <main class="form-container">
+    <form id="main-form" novalidate>
+
+      <!-- ===== SECTION 1: Personal Information ===== -->
+      <section class="form-section">
+        <h2 class="section-title">
+          <span class="section-num">1</span> Personal Information
+        </h2>
+        <div class="field-grid">
+
+          <div class="field-group">
+            <label for="first_name">First Name <span class="req">*</span></label>
+            <input type="text" id="first_name" name="first_name"
+                   placeholder="e.g. John" required autocomplete="off"/>
+          </div>
+
+          <div class="field-group">
+            <label for="middle_name">Middle Name</label>
+            <input type="text" id="middle_name" name="middle_name"
+                   placeholder="e.g. Joseph" autocomplete="off"/>
+          </div>
+
+          <div class="field-group">
+            <label for="last_name">Last Name <span class="req">*</span></label>
+            <input type="text" id="last_name" name="last_name"
+                   placeholder="e.g. Doe" required autocomplete="off"/>
+          </div>
+
+          <div class="field-group">
+            <label for="date_of_birth">Date of Birth <span class="req">*</span></label>
+            <input type="date" id="date_of_birth" name="date_of_birth" required/>
+          </div>
+
+          <div class="field-group">
+            <label for="gender">Gender <span class="req">*</span></label>
+            <select id="gender" name="gender" required>
+              <option value="">— Select —</option>
+              <option value="Man">Man</option>
+              <option value="Woman">Woman</option>
+            </select>
+          </div>
+
+          <!-- Conditional: Maiden Name (Women only) -->
+          <div class="field-group conditional" id="maiden-name-group" style="display:none;">
+            <label for="maiden_name">Maiden Name (Birth Last Name) <span class="req">*</span></label>
+            <input type="text" id="maiden_name" name="maiden_name"
+                   placeholder="e.g. Jenkins" autocomplete="off"/>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ===== SECTION 2: Current Address ===== -->
+      <section class="form-section">
+        <h2 class="section-title">
+          <span class="section-num">2</span> Current Address
+        </h2>
+        <div class="field-grid">
+
+          <div class="field-group">
+            <label for="current_county">County <span class="req">*</span></label>
+            <input type="text" id="current_county" name="current_county"
+                   placeholder="e.g. Broward" required autocomplete="off"/>
+          </div>
+
+          <div class="field-group field-group--wide">
+            <label for="current_street">Street Address <span class="req">*</span></label>
+            <input type="text" id="current_street" name="current_street"
+                   placeholder="Spelled out, no abbreviations" required autocomplete="off"/>
+          </div>
+
+          <div class="field-group">
+            <label for="current_city">City <span class="req">*</span></label>
+            <input type="text" id="current_city" name="current_city"
+                   placeholder="e.g. Miami" required autocomplete="off"/>
+          </div>
+
+          <div class="field-group">
+            <label for="current_state">State (Spelled Out) <span class="req">*</span></label>
+            <input type="text" id="current_state" name="current_state"
+                   placeholder="e.g. California" required autocomplete="off"/>
+          </div>
+
+          <div class="field-group">
+            <label for="current_zip">Zip Code <span class="req">*</span></label>
+            <input type="text" id="current_zip" name="current_zip"
+                   placeholder="e.g. 33101" required autocomplete="off" maxlength="10"/>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ===== SECTION 3: Birth Information ===== -->
+      <section class="form-section">
+        <h2 class="section-title">
+          <span class="section-num">3</span> Birth Information
+        </h2>
+        <div class="field-grid">
+
+          <div class="field-group">
+            <label for="born_in_america">Born in America? <span class="req">*</span></label>
+            <select id="born_in_america" name="born_in_america" required>
+              <option value="">— Select —</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No (I'm naturalized)</option>
+            </select>
+          </div>
+
+          <div class="field-group">
+            <label for="birth_county">Birth County <span class="req">*</span></label>
+            <input type="text" id="birth_county" name="birth_county"
+                   placeholder="e.g. Hamilton" required autocomplete="off"/>
+          </div>
+
+          <div class="field-group">
+            <label for="birth_city">Birth City <span class="req">*</span></label>
+            <input type="text" id="birth_city" name="birth_city"
+                   placeholder="e.g. Chicago" required autocomplete="off"/>
+          </div>
+
+          <div class="field-group">
+            <label for="birth_state">Birth State (or Naturalized State) <span class="req">*</span></label>
+            <input type="text" id="birth_state" name="birth_state"
+                   placeholder="e.g. Tennessee" required autocomplete="off"/>
+          </div>
+
+          <!-- Conditional: Foreign birth (if not born in America) -->
+          <div class="field-group field-group--wide conditional" id="foreign-birth-group" style="display:none;">
+            <label for="foreign_birth_location">Foreign Birth City and Country</label>
+            <input type="text" id="foreign_birth_location" name="foreign_birth_location"
+                   placeholder="e.g. Tokyo, Japan" autocomplete="off"/>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ===== SECTION 4: Post Office ===== -->
+      <section class="form-section">
+        <h2 class="section-title">
+          <span class="section-num">4</span> Post Office / Mailing Address
+        </h2>
+        <div class="hint">This is the mailing address that appears on official documents — may differ from current residence.</div>
+        <div class="field-grid">
+
+          <div class="field-group field-group--wide">
+            <label for="post_office_address">Post Office Address <span class="req">*</span></label>
+            <input type="text" id="post_office_address" name="post_office_address"
+                   placeholder="e.g. 123 Main Street, Hendersonville, Tennessee" required autocomplete="off"/>
+          </div>
+
+          <div class="field-group">
+            <label for="post_office_zip">Post Office Zip Code <span class="req">*</span></label>
+            <input type="text" id="post_office_zip" name="post_office_zip"
+                   placeholder="e.g. 37075" required autocomplete="off" maxlength="10"/>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ===== SECTION 5: Parental Information ===== -->
+      <section class="form-section">
+        <h2 class="section-title">
+          <span class="section-num">5</span> Parental Information
+        </h2>
+        <div class="field-grid">
+
+          <div class="field-group field-group--wide">
+            <label for="father_name">Father's Full Name <span class="req">*</span></label>
+            <input type="text" id="father_name" name="father_name"
+                   placeholder="First Middle Last" required autocomplete="off"/>
+          </div>
+
+          <div class="field-group field-group--wide">
+            <label for="mother_name_married">Mother's Full Name (Married) <span class="req">*</span></label>
+            <input type="text" id="mother_name_married" name="mother_name_married"
+                   placeholder="First Middle Last as married" required autocomplete="off"/>
+          </div>
+
+          <div class="field-group">
+            <label for="mother_maiden_name">Mother's Maiden Name (Last Name Only) <span class="req">*</span></label>
+            <input type="text" id="mother_maiden_name" name="mother_maiden_name"
+                   placeholder="e.g. Jackson" required autocomplete="off"/>
+          </div>
+
+          <div class="field-group">
+            <label for="parents_married">Were Parents Married at Birth? <span class="req">*</span></label>
+            <select id="parents_married" name="parents_married" required>
+              <option value="">— Select —</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+
+          <!-- Conditional: Wedding info -->
+          <div class="field-group conditional" id="wedding-date-group" style="display:none;">
+            <label for="parents_wedding_date">Parents' Wedding Date <span class="req">*</span></label>
+            <input type="text" id="parents_wedding_date" name="parents_wedding_date"
+                   placeholder="e.g. 9/15/1983" autocomplete="off"/>
+          </div>
+
+          <div class="field-group conditional" id="wedding-location-group" style="display:none;">
+            <label for="parents_wedding_location">Parents' Wedding City and State <span class="req">*</span></label>
+            <input type="text" id="parents_wedding_location" name="parents_wedding_location"
+                   placeholder="e.g. Chicago, Illinois" autocomplete="off"/>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ===== SECTION 6: Identity & Government ===== -->
+      <section class="form-section">
+        <h2 class="section-title">
+          <span class="section-num">6</span> Identity &amp; Government
+        </h2>
+        <div class="field-grid">
+
+          <div class="field-group field-group--wide">
+            <label for="state_identity">State Identity — What do you consider yourself? <span class="req">*</span></label>
+            <input type="text" id="state_identity" name="state_identity"
+                   placeholder="e.g. Tennessean, Texan, Californian" required autocomplete="off"/>
+          </div>
+
+          <div class="field-group">
+            <label for="ssn">Social Security Number <span class="req">*</span></label>
+            <input type="text" id="ssn" name="ssn"
+                   placeholder="XXX-XX-XXXX" required autocomplete="off" maxlength="11"/>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ===== SECTION 7: Document Options ===== -->
+      <section class="form-section">
+        <h2 class="section-title">
+          <span class="section-num">7</span> Document Options
+        </h2>
+        <div class="field-grid">
+
+          <div class="field-group">
+            <label for="include_roe">Include ROE Documents? <span class="req">*</span></label>
+            <select id="include_roe" name="include_roe" required>
+              <option value="">— Select —</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+
+          <!-- Conditional: Business ROE -->
+          <div class="field-group conditional" id="business-roe-group" style="display:none;">
+            <label for="business_roe">Business ROE Version? <span class="req">*</span></label>
+            <select id="business_roe" name="business_roe">
+              <option value="No">No (Standard)</option>
+              <option value="Yes">Yes (Business)</option>
+            </select>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ===== ADVANCED (hidden) ===== -->
+      <details class="advanced-section">
+        <summary>Advanced Options</summary>
+        <div class="field-grid" style="margin-top:1rem;">
+          <div class="field-group">
+            <label for="has_political_status">Include Political Status Documents?</label>
+            <select id="has_political_status" name="has_political_status">
+              <option value="Yes" selected>Yes (default)</option>
+              <option value="No">No (ROE-only clients)</option>
+            </select>
+          </div>
+        </div>
+      </details>
+
+      <!-- Submit -->
+      <div class="submit-row">
+        <button type="submit" class="btn btn-generate" id="submit-btn">
+          &#9658; Generate Documents
+        </button>
+      </div>
+
+    </form>
+  </main>
+
+  <footer class="app-footer">
+    ASN Consulting Document Generator &mdash; Internal Use Only
+  </footer>
+
+</div><!-- .page-wrapper -->
+
+<script src="/static/script.js"></script>
+</body>
+</html>
