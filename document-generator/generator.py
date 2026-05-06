@@ -423,6 +423,7 @@ def generate_all_documents(form_data: dict) -> dict:
             "label":    "Status Correction Documents",
             "template": tpl("Master 928 Docs Originals - State Nationals.docx"),
             "output":   out("Status Correction Documents"),
+            "photo":    True,
         },
         {
             "label":    "Act of Expatriation",
@@ -479,7 +480,6 @@ def generate_all_documents(form_data: dict) -> dict:
                 "label":    "ROE Testimony",
                 "template": tpl(test_tpl),
                 "output":   out("ROE Testimony"),
-                "photo":    True,
             },
         ]
 
