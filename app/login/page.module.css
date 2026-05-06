@@ -1,0 +1,246 @@
+.main {
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+  background-image: radial-gradient(rgba(200, 150, 60, 0.055) 1px, transparent 1px);
+  background-size: 28px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+}
+
+.card {
+  width: 100%;
+  max-width: 400px;
+  background: var(--bg-card);
+  border: 1px solid rgba(200, 150, 60, 0.12);
+  border-radius: 12px;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.cardAccent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.logo {
+  display: block;
+  margin: 0 auto 24px;
+  width: 160px;
+}
+
+.labelWrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.heading {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 24px;
+  font-weight: 300;
+  color: var(--cream);
+  text-align: center;
+  margin: 0 0 6px;
+}
+
+.sub {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+  margin: 0 0 28px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.input {
+  width: 100%;
+  padding: 11px 14px;
+  background: var(--bg-secondary);
+  border: 1px solid rgba(200, 150, 60, 0.18);
+  border-radius: 5px;
+  color: var(--cream);
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.input:focus {
+  border-color: rgba(200, 150, 60, 0.5);
+}
+
+.forgotRow {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -6px;
+}
+
+.forgotLink {
+  font-size: 11px;
+  color: var(--gold);
+  text-decoration: none;
+}
+
+.forgotLink:hover {
+  text-decoration: underline;
+}
+
+.submitBtn {
+  width: 100%;
+  padding: 13px;
+  background: var(--gold);
+  color: #0C0D11;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.18s, opacity 0.18s;
+  margin-top: 4px;
+}
+
+.submitBtn:hover:not(:disabled) {
+  background: var(--gold-hover);
+}
+
+.submitBtn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.error {
+  background: rgba(224, 90, 90, 0.08);
+  border: 1px solid rgba(224, 90, 90, 0.25);
+  border-radius: 5px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #E05A5A;
+}
+
+.footer {
+  margin-top: 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footerText {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.footerLink {
+  color: var(--gold);
+  text-decoration: none;
+}
+
+.footerLink:hover {
+  text-decoration: underline;
+}
+
+.backLink {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.backLink:hover {
+  color: var(--cream-muted);
+}
+
+/* two-column grid used by signup */
+.twoCol {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.fieldError {
+  font-size: 11px;
+  color: #E05A5A;
+  margin-top: 2px;
+}
+
+/* success state */
+.successWrap {
+  text-align: center;
+  padding: 16px 0;
+}
+
+.successIcon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.successHeading {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 22px;
+  font-weight: 300;
+  color: var(--cream);
+  margin: 0 0 12px;
+}
+
+.successPara {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin: 0 0 24px;
+}
+
+.successBtn {
+  display: inline-block;
+  padding: 11px 28px;
+  border: 1px solid rgba(200, 150, 60, 0.4);
+  border-radius: 5px;
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.18s;
+}
+
+.successBtn:hover {
+  background: rgba(200, 150, 60, 0.08);
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 32px 24px;
+  }
+
+  .twoCol {
+    grid-template-columns: 1fr;
+  }
+}

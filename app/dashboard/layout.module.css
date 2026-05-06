@@ -1,0 +1,175 @@
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 240px;
+  background: var(--bg-card);
+  border-right: 1px solid rgba(200, 150, 60, 0.12);
+  padding: 28px 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+}
+
+.sidebarLogo {
+  padding: 0 24px;
+  margin-bottom: 32px;
+  display: block;
+}
+
+.sidebarNav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 24px;
+  font-size: 13px;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s, background 0.2s;
+  border-left: 3px solid transparent;
+}
+
+.navLink:hover {
+  color: var(--cream-muted);
+  background: rgba(255, 255, 255, 0.03);
+  border-left-color: rgba(200, 150, 60, 0.3);
+}
+
+.navLinkActive {
+  color: var(--gold);
+  background: rgba(200, 150, 60, 0.05);
+  border-left-color: var(--gold);
+}
+
+.navIcon {
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+.navLinkActive .navIcon {
+  opacity: 1;
+}
+
+.sidebarBottom {
+  margin-top: auto;
+  padding: 0 24px 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.userEmail {
+  font-size: 11px;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.signOutBtn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-family: inherit;
+  padding: 7px 14px;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+  text-align: left;
+  width: 100%;
+}
+
+.signOutBtn:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+  color: var(--cream-muted);
+}
+
+/* ─── Mobile top bar ─── */
+.mobileTopBar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  background: var(--bg-card);
+  border-bottom: 1px solid rgba(200, 150, 60, 0.12);
+  z-index: 200;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.mobileLogo {
+  display: block;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--cream-muted);
+  border-radius: 2px;
+  transition: opacity 0.2s;
+}
+
+/* ─── Mobile drawer overlay ─── */
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 150;
+}
+
+.overlayVisible {
+  display: block;
+}
+
+.drawerOpen {
+  transform: translateX(0) !important;
+}
+
+/* ─── Main content ─── */
+.main {
+  margin-left: 240px;
+  min-height: 100vh;
+  background: var(--bg-primary);
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    z-index: 200;
+    width: 260px;
+  }
+
+  .mobileTopBar {
+    display: flex;
+  }
+
+  .main {
+    margin-left: 0;
+    padding-top: 56px;
+  }
+}
