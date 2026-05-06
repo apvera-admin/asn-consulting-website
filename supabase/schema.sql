@@ -9,6 +9,8 @@ create table if not exists public.profiles (
   email text not null,
   full_name text,
   plan_tier text check (plan_tier in ('individual', 'partner', 'family', 'roe')) default null,
+  purchased_services text[] default null,
+  submission_limit_override integer default null,
   plan_purchased_at timestamptz default null,
   stripe_customer_id text default null,
   stripe_payment_intent_id text default null,
@@ -65,3 +67,22 @@ drop trigger if exists on_auth_user_created on auth.users;
 create trigger on_auth_user_created
   after insert on auth.users
   for each row execute procedure public.handle_new_user();
+
+-- ============================================================
+-- Migration: add purchased_services and submission_limit_override
+-- Run this in Supabase SQL editor if the table already exists
+-- ============================================================
+alter table public.profiles
+  add column if not exists purchased_services text[] default null,
+  add column if not exists submission_limit_override integer default null;
+
+-- Backfill purchased_services for existing users based on plan_tier
+update public.profiles
+set purchased_services = ARRAY['status_correction']
+where plan_tier in ('individual', 'partner', 'family')
+  and (purchased_services is null or array_length(purchased_services, 1) is null);
+
+update public.profiles
+set purchased_services = ARRAY['roe']
+where plan_tier = 'roe'
+  and (purchased_services is null or array_length(purchased_services, 1) is null);

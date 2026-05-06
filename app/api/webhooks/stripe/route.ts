@@ -23,6 +23,13 @@ const SUBMISSION_LIMITS: Record<string, number> = {
   roe: 1,
 };
 
+const PLAN_SERVICES: Record<string, string[]> = {
+  individual: ['status_correction'],
+  partner:    ['status_correction'],
+  family:     ['status_correction'],
+  roe:        ['roe'],
+};
+
 async function sendEmail(to: string, subject: string, html: string) {
   try {
     await fetch('https://api.resend.com/emails', {
@@ -116,11 +123,14 @@ export async function POST(req: NextRequest) {
         .eq('email', customerEmail)
         .single();
 
+      const purchasedServices = PLAN_SERVICES[planTier] ?? ['status_correction'];
+
       if (existing) {
         await adminClient
           .from('profiles')
           .update({
             plan_tier: planTier,
+            purchased_services: purchasedServices,
             plan_purchased_at: new Date().toISOString(),
             stripe_customer_id: stripeCustomerId,
             submissions_used: 0,
@@ -140,6 +150,7 @@ export async function POST(req: NextRequest) {
             .from('profiles')
             .update({
               plan_tier: planTier,
+              purchased_services: purchasedServices,
               plan_purchased_at: new Date().toISOString(),
               stripe_customer_id: stripeCustomerId,
             })
