@@ -13,17 +13,20 @@ export async function GET(req: NextRequest) {
   }
 
   const email = req.nextUrl.searchParams.get('email') ?? '';
-  if (email.length < 2) {
-    return NextResponse.json({ users: [] });
-  }
 
-  const { data, error } = await adminClient
+  let query = adminClient
     .from('profiles')
     .select(
       'id, email, full_name, plan_tier, purchased_services, submission_limit_override, submissions_used, plan_purchased_at, hha_signed'
     )
-    .ilike('email', `%${email}%`)
-    .limit(20);
+    .order('plan_purchased_at', { ascending: false })
+    .limit(200);
+
+  if (email.length >= 2) {
+    query = query.ilike('email', `%${email}%`);
+  }
+
+  const { data, error } = await query;
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });

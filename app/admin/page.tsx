@@ -21,7 +21,6 @@ const SUBMISSION_LIMITS: Record<string, number> = {
   individual: 1, partner: 2, family: 4, roe: 1,
 };
 
-// ── Per-card state ──────────────────────────────────────────────────────────
 interface CardState {
   submissionsInput: string;
   overrideInput: string;
@@ -35,9 +34,7 @@ interface CardState {
 function makeCardState(u: UserProfile): CardState {
   return {
     submissionsInput: String(u.submissions_used ?? 0),
-    overrideInput: u.submission_limit_override != null
-      ? String(u.submission_limit_override)
-      : '',
+    overrideInput: u.submission_limit_override != null ? String(u.submission_limit_override) : '',
     addServiceVal: '',
     planTierVal: u.plan_tier ?? '',
     saving: false,
@@ -46,19 +43,17 @@ function makeCardState(u: UserProfile): CardState {
   };
 }
 
-// ── Admin page ──────────────────────────────────────────────────────────────
 export default function AdminPage() {
-  // Password gate
   const [adminKey, setAdminKey] = useState('');
   const [keyInput, setKeyInput] = useState('');
   const [gateError, setGateError] = useState('');
   const [gateLoading, setGateLoading] = useState(false);
 
-  // Search
   const [query, setQuery] = useState('');
-  const [searching, setSearching] = useState(false);
-  const [users, setUsers] = useState<UserProfile[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [allUsers, setAllUsers] = useState<UserProfile[]>([]);
   const [cardStates, setCardStates] = useState<Record<string, CardState>>({});
+  const [expandedId, setExpandedId] = useState<string | null>(null);
   const searchTimer = useRef<ReturnType<typeof setTimeout>>();
 
   async function handlePasswordSubmit(e: React.FormEvent) {
@@ -82,97 +77,76 @@ export default function AdminPage() {
     }
   }
 
-  // Search with debounce
+  // Load all users on unlock, then debounce-search when query changes
+  async function fetchUsers(emailFilter = '') {
+    setLoading(true);
+    try {
+      const url = emailFilter.length >= 2
+        ? `/api/admin/users?email=${encodeURIComponent(emailFilter)}`
+        : '/api/admin/users';
+      const res = await fetch(url, { headers: { 'x-admin-key': adminKey } });
+      const json = await res.json();
+      const found: UserProfile[] = json.users ?? [];
+      setAllUsers(found);
+      setCardStates(prev => {
+        const next = { ...prev };
+        for (const u of found) {
+          if (!next[u.id]) next[u.id] = makeCardState(u);
+        }
+        return next;
+      });
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    if (!adminKey) return;
+    fetchUsers();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [adminKey]);
+
   useEffect(() => {
     if (!adminKey) return;
     clearTimeout(searchTimer.current);
-    if (query.length < 2) {
-      setUsers([]);
-      return;
-    }
-    setSearching(true);
-    searchTimer.current = setTimeout(async () => {
-      try {
-        const res = await fetch(
-          `/api/admin/users?email=${encodeURIComponent(query)}`,
-          { headers: { 'x-admin-key': adminKey } }
-        );
-        const json = await res.json();
-        const found: UserProfile[] = json.users ?? [];
-        setUsers(found);
-        setCardStates(prev => {
-          const next = { ...prev };
-          for (const u of found) {
-            if (!next[u.id]) next[u.id] = makeCardState(u);
-          }
-          return next;
-        });
-      } finally {
-        setSearching(false);
-      }
-    }, 300);
+    searchTimer.current = setTimeout(() => fetchUsers(query), 300);
     return () => clearTimeout(searchTimer.current);
-  }, [query, adminKey]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query]);
 
   function setCardField(id: string, patch: Partial<CardState>) {
-    setCardStates(prev => ({
-      ...prev,
-      [id]: { ...prev[id], ...patch },
-    }));
+    setCardStates(prev => ({ ...prev, [id]: { ...prev[id], ...patch } }));
   }
 
-  async function patch(
-    userId: string,
-    payload: Record<string, unknown>,
-    optimisticUpdate?: (u: UserProfile) => UserProfile
-  ) {
+  async function patch(userId: string, payload: Record<string, unknown>) {
     setCardField(userId, { saving: true, feedback: '' });
     try {
       const res = await fetch(`/api/admin/users/${userId}`, {
         method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-admin-key': adminKey,
-        },
+        headers: { 'Content-Type': 'application/json', 'x-admin-key': adminKey },
         body: JSON.stringify(payload),
       });
       const json = await res.json();
       if (!res.ok) {
-        setCardField(userId, {
-          saving: false,
-          feedback: json.error ?? 'Save failed',
-          feedbackOk: false,
-        });
+        setCardField(userId, { saving: false, feedback: json.error ?? 'Save failed', feedbackOk: false });
         return;
       }
-      // Update local user data from server response
       const updated: UserProfile = json.user;
-      setUsers(prev => prev.map(u => u.id === userId ? updated : u));
+      setAllUsers(prev => prev.map(u => u.id === userId ? updated : u));
       setCardStates(prev => ({
         ...prev,
-        [userId]: {
-          ...makeCardState(updated),
-          saving: false,
-          feedback: 'Saved.',
-          feedbackOk: true,
-        },
+        [userId]: { ...makeCardState(updated), saving: false, feedback: 'Saved.', feedbackOk: true },
       }));
     } catch {
-      setCardField(userId, {
-        saving: false,
-        feedback: 'Network error',
-        feedbackOk: false,
-      });
+      setCardField(userId, { saving: false, feedback: 'Network error', feedbackOk: false });
     }
   }
 
-  // ── Password gate ─────────────────────────────────────────────────────────
+  // ── Password gate ──────────────────────────────────────────────────────────
   if (!adminKey) {
     return (
       <div className={styles.page}>
-        <div className={styles.warningBanner}>
-          Admin Panel — Internal Use Only
-        </div>
+        <div className={styles.warningBanner}>Admin Panel — Internal Use Only</div>
         <div className={styles.gate}>
           <form className={styles.gateCard} onSubmit={handlePasswordSubmit}>
             <h1 className={styles.gateHeading}>Admin Access</h1>
@@ -185,14 +159,8 @@ export default function AdminPage() {
               onChange={e => { setKeyInput(e.target.value); setGateError(''); }}
               autoFocus
             />
-            {gateError && (
-              <p className={styles.gateError}>{gateError}</p>
-            )}
-            <button
-              type="submit"
-              className={styles.gateBtn}
-              disabled={gateLoading || !keyInput}
-            >
+            {gateError && <p className={styles.gateError}>{gateError}</p>}
+            <button type="submit" className={styles.gateBtn} disabled={gateLoading || !keyInput}>
               {gateLoading ? 'Verifying…' : 'Enter'}
             </button>
           </form>
@@ -201,47 +169,54 @@ export default function AdminPage() {
     );
   }
 
-  // ── Main admin UI ─────────────────────────────────────────────────────────
+  // ── Main UI ────────────────────────────────────────────────────────────────
   return (
     <div className={styles.page}>
-      <div className={styles.warningBanner}>
-        Admin Panel — Internal Use Only
-      </div>
+      <div className={styles.warningBanner}>Admin Panel — Internal Use Only</div>
 
       <div className={styles.main}>
         <div className={styles.topRow}>
-          <h1 className={styles.adminHeading}>User Management</h1>
+          <div>
+            <h1 className={styles.adminHeading}>User Management</h1>
+            <p className={styles.adminSub}>{allUsers.length} user{allUsers.length !== 1 ? 's' : ''}</p>
+          </div>
           <button
             className={styles.logoutBtn}
-            onClick={() => { setAdminKey(''); setKeyInput(''); setUsers([]); setQuery(''); }}
+            onClick={() => { setAdminKey(''); setKeyInput(''); setAllUsers([]); setQuery(''); }}
           >
             Log Out
           </button>
         </div>
 
-        {/* Search */}
         <div className={styles.searchRow}>
           <input
             className={styles.searchInput}
             type="text"
-            placeholder="Search by email address…"
+            placeholder="Filter by email…"
             value={query}
             onChange={e => setQuery(e.target.value)}
-            autoFocus
           />
+          {loading && <span className={styles.searching}>Loading…</span>}
         </div>
 
-        {searching && <p className={styles.searching}>Searching…</p>}
+        {/* Table header */}
+        <div className={styles.tableHeader}>
+          <span style={{ flex: '0 0 220px' }}>Email / Name</span>
+          <span style={{ flex: '0 0 90px' }}>Plan</span>
+          <span style={{ flex: '0 0 110px' }}>Submissions</span>
+          <span style={{ flex: '0 0 90px' }}>HHA</span>
+          <span style={{ flex: 1 }}>Services</span>
+          <span style={{ width: 20 }} />
+        </div>
 
-        {!searching && query.length >= 2 && users.length === 0 && (
-          <p className={styles.noResults}>No users found matching &ldquo;{query}&rdquo;</p>
+        {allUsers.length === 0 && !loading && (
+          <p className={styles.noResults}>No users found.</p>
         )}
 
-        {/* User cards */}
-        {users.map(user => {
+        {allUsers.map(user => {
           const cs = cardStates[user.id];
           if (!cs) return null;
-
+          const isOpen = expandedId === user.id;
           const effectiveLimit =
             user.submission_limit_override ??
             SUBMISSION_LIMITS[user.plan_tier ?? ''] ??
@@ -249,204 +224,164 @@ export default function AdminPage() {
           const atLimit = user.submissions_used >= effectiveLimit;
 
           return (
-            <div key={user.id} className={styles.userCard}>
-              {/* Top row: email + meta badges */}
-              <div className={styles.cardTop}>
-                <div>
-                  <div className={styles.cardEmail}>{user.email}</div>
-                  {user.full_name && (
-                    <div className={styles.cardName}>{user.full_name}</div>
-                  )}
+            <div key={user.id} className={`${styles.userRow}${isOpen ? ` ${styles.userRowOpen}` : ''}`}>
+
+              {/* ── Summary row (always visible, clickable) ── */}
+              <div
+                className={styles.rowSummary}
+                onClick={() => setExpandedId(isOpen ? null : user.id)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={e => e.key === 'Enter' && setExpandedId(isOpen ? null : user.id)}
+              >
+                {/* Email + name */}
+                <div className={styles.colIdentity}>
+                  <span className={styles.rowEmail}>{user.email}</span>
+                  {user.full_name && <span className={styles.rowName}>{user.full_name}</span>}
                 </div>
-                <div className={styles.cardMeta}>
-                  {user.plan_tier && (
-                    <span className={`${styles.badge} ${styles.badgePlan}`}>
-                      {user.plan_tier}
-                    </span>
-                  )}
-                  <span
-                    className={`${styles.subCount}${atLimit ? ` ${styles.subCountWarning}` : ''}`}
-                  >
-                    {user.submissions_used} / {effectiveLimit} submissions
-                    {user.submission_limit_override != null && ' (override)'}
+
+                {/* Plan */}
+                <div className={styles.colPlan}>
+                  {user.plan_tier
+                    ? <span className={`${styles.badge} ${styles.badgePlan}`}>{user.plan_tier}</span>
+                    : <span className={styles.rowMuted}>—</span>}
+                </div>
+
+                {/* Submissions */}
+                <div className={styles.colSubs}>
+                  <span className={`${styles.subCount}${atLimit ? ` ${styles.subCountWarning}` : ''}`}>
+                    {user.submissions_used} / {effectiveLimit}
+                    {user.submission_limit_override != null && <span className={styles.overrideDot} title="Override active"> ●</span>}
                   </span>
-                  <span
-                    className={`${styles.badge} ${user.hha_signed ? styles.badgeHha : styles.badgeHhaNo}`}
-                  >
-                    HHA {user.hha_signed ? 'signed' : 'not signed'}
+                </div>
+
+                {/* HHA */}
+                <div className={styles.colHha}>
+                  <span className={`${styles.badge} ${user.hha_signed ? styles.badgeHha : styles.badgeHhaNo}`}>
+                    {user.hha_signed ? 'Signed' : 'Not signed'}
                   </span>
-                  {user.plan_purchased_at && (
-                    <span className={styles.purchasedDate}>
-                      Purchased{' '}
-                      {new Date(user.plan_purchased_at).toLocaleDateString()}
-                    </span>
-                  )}
+                </div>
+
+                {/* Services */}
+                <div className={styles.colServices}>
+                  {(user.purchased_services ?? []).length > 0
+                    ? (user.purchased_services!.map(svc => (
+                        <span key={svc} className={`${styles.badge} ${styles.badgeService}`}>{svc}</span>
+                      )))
+                    : <span className={styles.rowMuted}>None</span>}
+                </div>
+
+                {/* Chevron */}
+                <div className={`${styles.chevron}${isOpen ? ` ${styles.chevronOpen}` : ''}`}>
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
                 </div>
               </div>
 
-              {/* Purchased services badges */}
-              {(user.purchased_services?.length ?? 0) > 0 && (
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 12 }}>
-                  {user.purchased_services!.map(svc => (
-                    <span key={svc} className={`${styles.badge} ${styles.badgeService}`}>
-                      {svc}
-                      <button
-                        className={styles.badgeRemoveBtn}
-                        title={`Remove ${svc}`}
-                        disabled={cs.saving}
-                        onClick={() =>
-                          patch(user.id, {
-                            purchased_services: user.purchased_services!.filter(
-                              s => s !== svc
-                            ),
-                          })
-                        }
-                      >
-                        ×
+              {/* ── Expanded actions panel ── */}
+              {isOpen && (
+                <div className={styles.expandPanel}>
+
+                  {/* Service badges with remove */}
+                  {(user.purchased_services ?? []).length > 0 && (
+                    <div className={styles.serviceBadges}>
+                      {user.purchased_services!.map(svc => (
+                        <span key={svc} className={`${styles.badge} ${styles.badgeService}`}>
+                          {svc}
+                          <button
+                            className={styles.badgeRemoveBtn}
+                            title={`Remove ${svc}`}
+                            disabled={cs.saving}
+                            onClick={() => patch(user.id, {
+                              purchased_services: user.purchased_services!.filter(s => s !== svc),
+                            })}
+                          >×</button>
+                        </span>
+                      ))}
+                    </div>
+                  )}
+
+                  <div className={styles.actions}>
+                    {/* Reset */}
+                    <div className={styles.actionGroup}>
+                      <button className={`${styles.btn} ${styles.btnRed}`} disabled={cs.saving}
+                        onClick={() => patch(user.id, { submissions_used: 0 })}>
+                        Reset Submissions
                       </button>
-                    </span>
-                  ))}
-                </div>
-              )}
+                    </div>
 
-              <hr className={styles.divider} />
+                    {/* Set used */}
+                    <div className={styles.actionGroup}>
+                      <span className={styles.actionLabel}>Set Used</span>
+                      <input className={styles.actionInput} type="number" min={0}
+                        value={cs.submissionsInput}
+                        onChange={e => setCardField(user.id, { submissionsInput: e.target.value })} />
+                      <button className={`${styles.btn} ${styles.btnGold}`} disabled={cs.saving}
+                        onClick={() => patch(user.id, { submissions_used: parseInt(cs.submissionsInput, 10) || 0 })}>
+                        Set
+                      </button>
+                    </div>
 
-              {/* Actions */}
-              <div className={styles.actions}>
+                    {/* Override limit */}
+                    <div className={styles.actionGroup}>
+                      <span className={styles.actionLabel}>Override Limit</span>
+                      <input className={styles.actionInput} type="number" min={0} placeholder="—"
+                        value={cs.overrideInput}
+                        onChange={e => setCardField(user.id, { overrideInput: e.target.value })} />
+                      <button className={`${styles.btn} ${styles.btnGold}`} disabled={cs.saving}
+                        onClick={() => patch(user.id, {
+                          submission_limit_override: cs.overrideInput ? parseInt(cs.overrideInput, 10) : null,
+                        })}>
+                        Set
+                      </button>
+                    </div>
 
-                {/* Reset submissions */}
-                <div className={styles.actionGroup}>
-                  <button
-                    className={`${styles.btn} ${styles.btnRed}`}
-                    disabled={cs.saving}
-                    onClick={() => patch(user.id, { submissions_used: 0 })}
-                  >
-                    Reset Submissions
-                  </button>
-                </div>
+                    {/* Add service */}
+                    <div className={styles.actionGroup}>
+                      <span className={styles.actionLabel}>Add Service</span>
+                      <select className={styles.actionSelect} value={cs.addServiceVal}
+                        onChange={e => setCardField(user.id, { addServiceVal: e.target.value })}>
+                        <option value="">— pick —</option>
+                        {ALL_SERVICES.filter(s => !(user.purchased_services ?? []).includes(s)).map(s => (
+                          <option key={s} value={s}>{s}</option>
+                        ))}
+                      </select>
+                      <button className={`${styles.btn} ${styles.btnGreen}`}
+                        disabled={cs.saving || !cs.addServiceVal}
+                        onClick={() => {
+                          const current = user.purchased_services ?? [];
+                          if (cs.addServiceVal && !current.includes(cs.addServiceVal)) {
+                            patch(user.id, { purchased_services: [...current, cs.addServiceVal] });
+                          }
+                        }}>
+                        Add
+                      </button>
+                    </div>
 
-                {/* Set submissions used */}
-                <div className={styles.actionGroup}>
-                  <span className={styles.actionLabel}>Set Used</span>
-                  <input
-                    className={styles.actionInput}
-                    type="number"
-                    min={0}
-                    value={cs.submissionsInput}
-                    onChange={e =>
-                      setCardField(user.id, { submissionsInput: e.target.value })
-                    }
-                  />
-                  <button
-                    className={`${styles.btn} ${styles.btnGold}`}
-                    disabled={cs.saving}
-                    onClick={() =>
-                      patch(user.id, {
-                        submissions_used: parseInt(cs.submissionsInput, 10) || 0,
-                      })
-                    }
-                  >
-                    Set
-                  </button>
-                </div>
+                    {/* Plan tier */}
+                    <div className={styles.actionGroup}>
+                      <span className={styles.actionLabel}>Plan Tier</span>
+                      <select className={styles.actionSelect} value={cs.planTierVal}
+                        onChange={e => setCardField(user.id, { planTierVal: e.target.value })}>
+                        <option value="">— pick —</option>
+                        {PLAN_TIERS.map(t => (
+                          <option key={t} value={t}>{t}</option>
+                        ))}
+                      </select>
+                      <button className={`${styles.btn} ${styles.btnGold}`}
+                        disabled={cs.saving || !cs.planTierVal}
+                        onClick={() => patch(user.id, { plan_tier: cs.planTierVal })}>
+                        Set
+                      </button>
+                    </div>
+                  </div>
 
-                {/* Override limit */}
-                <div className={styles.actionGroup}>
-                  <span className={styles.actionLabel}>Override Limit</span>
-                  <input
-                    className={styles.actionInput}
-                    type="number"
-                    min={0}
-                    placeholder="—"
-                    value={cs.overrideInput}
-                    onChange={e =>
-                      setCardField(user.id, { overrideInput: e.target.value })
-                    }
-                  />
-                  <button
-                    className={`${styles.btn} ${styles.btnGold}`}
-                    disabled={cs.saving}
-                    onClick={() =>
-                      patch(user.id, {
-                        submission_limit_override: cs.overrideInput
-                          ? parseInt(cs.overrideInput, 10)
-                          : null,
-                      })
-                    }
-                  >
-                    Set
-                  </button>
-                </div>
-
-                {/* Add service */}
-                <div className={styles.actionGroup}>
-                  <span className={styles.actionLabel}>Add Service</span>
-                  <select
-                    className={styles.actionSelect}
-                    value={cs.addServiceVal}
-                    onChange={e =>
-                      setCardField(user.id, { addServiceVal: e.target.value })
-                    }
-                  >
-                    <option value="">— pick —</option>
-                    {ALL_SERVICES.filter(
-                      s => !(user.purchased_services ?? []).includes(s)
-                    ).map(s => (
-                      <option key={s} value={s}>{s}</option>
-                    ))}
-                  </select>
-                  <button
-                    className={`${styles.btn} ${styles.btnGreen}`}
-                    disabled={cs.saving || !cs.addServiceVal}
-                    onClick={() => {
-                      const current = user.purchased_services ?? [];
-                      if (cs.addServiceVal && !current.includes(cs.addServiceVal)) {
-                        patch(user.id, {
-                          purchased_services: [...current, cs.addServiceVal],
-                        });
-                      }
-                    }}
-                  >
-                    Add
-                  </button>
-                </div>
-
-                {/* Set plan tier */}
-                <div className={styles.actionGroup}>
-                  <span className={styles.actionLabel}>Plan Tier</span>
-                  <select
-                    className={styles.actionSelect}
-                    value={cs.planTierVal}
-                    onChange={e =>
-                      setCardField(user.id, { planTierVal: e.target.value })
-                    }
-                  >
-                    <option value="">— pick —</option>
-                    {PLAN_TIERS.map(t => (
-                      <option key={t} value={t}>{t}</option>
-                    ))}
-                  </select>
-                  <button
-                    className={`${styles.btn} ${styles.btnGold}`}
-                    disabled={cs.saving || !cs.planTierVal}
-                    onClick={() =>
-                      patch(user.id, { plan_tier: cs.planTierVal })
-                    }
-                  >
-                    Set
-                  </button>
-                </div>
-
-              </div>
-
-              {/* Per-card feedback */}
-              {cs.feedback && (
-                <div
-                  className={`${styles.cardFeedback} ${
-                    cs.feedbackOk ? styles.feedbackOk : styles.feedbackErr
-                  }`}
-                >
-                  {cs.feedback}
+                  {cs.feedback && (
+                    <div className={`${styles.cardFeedback} ${cs.feedbackOk ? styles.feedbackOk : styles.feedbackErr}`}>
+                      {cs.feedback}
+                    </div>
+                  )}
                 </div>
               )}
             </div>
