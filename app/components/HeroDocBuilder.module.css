@@ -221,16 +221,6 @@
 }
 
 @media (max-width: 768px) {
-  /* Hide the animated doc builder on mobile — saves space, prevents overflow */
-  :global(.heroDocBuilder),
-  [class*="wrap"],
-  [class*="builder"],
-  [class*="window"] {
-    display: none !important;
-  }
-}
-
-@media (max-width: 768px) {
   .wrap {
     display: none;
   }
