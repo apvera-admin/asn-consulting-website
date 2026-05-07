@@ -455,3 +455,33 @@
   .hamburger      { display: flex; }
   .mobileMenu     { display: flex; }
 }
+
+/* ─── Mobile nav fixes ─── */
+@media (max-width: 768px) {
+  .inner {
+    padding: 14px 16px;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .right {
+    gap: 0;
+  }
+
+  /* Hide the dashboard/login link in the top bar on mobile — it lives in the drawer */
+  .dashboardLink {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+    flex-shrink: 0;
+    margin-left: 12px;
+  }
+
+  /* Hide the mega menu entirely on mobile */
+  .mega {
+    display: none !important;
+  }
+}

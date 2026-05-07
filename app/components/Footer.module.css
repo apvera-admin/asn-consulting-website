@@ -112,3 +112,36 @@
 .bottomLinks a:hover {
   color: var(--gold);
 }
+
+@media (max-width: 768px) {
+  .inner {
+    padding: 36px 20px 24px;
+  }
+
+  .top {
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .brand {
+    max-width: 100%;
+  }
+
+  .cols {
+    flex-direction: column;
+    gap: 28px;
+    width: 100%;
+  }
+
+  .bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding-top: 16px;
+  }
+
+  .bottomLinks {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+}

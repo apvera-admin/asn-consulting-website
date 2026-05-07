@@ -92,3 +92,18 @@
   color: var(--text-muted);
   letter-spacing: 1px;
 }
+
+@media (max-width: 768px) {
+  .section {
+    padding: 48px 16px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .h2 {
+    font-size: 26px;
+  }
+}

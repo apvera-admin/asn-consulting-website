@@ -153,3 +153,18 @@
 .ctaOutline:hover {
   background: rgba(200, 150, 60, 0.1);
 }
+
+@media (max-width: 768px) {
+  .services {
+    padding: 48px 16px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .h2 {
+    font-size: 26px;
+  }
+}

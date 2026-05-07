@@ -36,3 +36,43 @@
   height: 36px;
   background: rgba(200, 150, 60, 0.14);
 }
+
+@media (max-width: 768px) {
+  .statsBar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0;
+    justify-items: center;
+  }
+
+  .stat {
+    padding: 20px 16px;
+    border-right: 1px solid rgba(200, 150, 60, 0.15);
+    border-bottom: 1px solid rgba(200, 150, 60, 0.15);
+    width: 100%;
+  }
+
+  /* Right column cells — no right border */
+  .stat:nth-child(4n+3),
+  .stat:nth-child(4n) {
+    border-right: none;
+  }
+
+  /* Bottom row — no bottom border */
+  .stat:nth-last-child(-n+4):nth-child(n+3) {
+    border-bottom: none;
+  }
+
+  .divider {
+    display: none;
+  }
+
+  .value {
+    font-size: 28px;
+  }
+
+  .label {
+    font-size: 9px;
+    letter-spacing: 1.5px;
+  }
+}
