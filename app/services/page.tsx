@@ -39,7 +39,7 @@ const jennaCards = [
       'A complimentary call with Jenna to assess your tax situation, review your eligibility for our tax remedy programs, and answer your initial questions.',
     duration: '20 min',
     price: 'Free',
-    link: 'https://cal.com/asn-consulting/tax-discovery',
+    link: 'https://cal.com/jennadscott',
   },
   {
     badge: 'Paid',
@@ -48,7 +48,7 @@ const jennaCards = [
       'A comprehensive one-hour session covering private trust formation, lawful money redemption, tax strategy, or any combination of these topics.',
     duration: '60 min',
     price: '$350',
-    link: 'https://cal.com/asn-consulting/trust-tax-consult',
+    link: 'https://cal.com/jennadscott',
   },
   {
     badge: 'Paid',
@@ -57,7 +57,7 @@ const jennaCards = [
       'Continued email-based support for existing clients. Submit your questions and receive a detailed written response with references and next steps.',
     duration: '1 hr support',
     price: '$295',
-    link: 'https://cal.com/asn-consulting/email-support-1hr',
+    link: 'https://cal.com/jennadscott',
   },
   {
     badge: 'Paid',
@@ -66,7 +66,7 @@ const jennaCards = [
       'A focused email exchange for quick clarifications, follow-up questions, or brief guidance on a specific topic — without booking a full call.',
     duration: '30 min support',
     price: '$195',
-    link: 'https://cal.com/asn-consulting/email-quick',
+    link: 'https://cal.com/jennadscott',
   },
 ];
 
