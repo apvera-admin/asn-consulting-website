@@ -385,14 +385,15 @@
   flex-direction: column;
   background: var(--bg-card);
   border-top: 1px solid rgba(200, 150, 60, 0.12);
-  padding: 16px 24px 24px;
+  padding: 0 24px;
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.35s ease;
+  transition: max-height 0.35s ease, padding 0.35s ease;
 }
 
 .mobileMenuOpen {
   max-height: 600px;
+  padding: 16px 24px 24px;
 }
 
 .mobileLink {
