@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { adminClient } from '@/lib/supabase/admin';
+import { acTrackEvent, AC_TAGS, AC_FIELDS } from '@/lib/activecampaign';
 
 export const dynamic = 'force-dynamic';
 
@@ -87,6 +88,18 @@ export async function POST(req: NextRequest) {
           { onConflict: 'email' }
         );
 
+      await acTrackEvent({
+        email: customerEmail,
+        firstName: session.customer_details?.name?.split(' ')[0] || '',
+        lastName: session.customer_details?.name?.split(' ').slice(1).join(' ') || '',
+        tagId: AC_TAGS.dfy_client,
+        fields: [
+          { fieldId: AC_FIELDS.purchase_type, value: 'dfy' },
+          { fieldId: AC_FIELDS.purchase_date, value: new Date().toISOString().split('T')[0] },
+          { fieldId: AC_FIELDS.case_status, value: 'payment_received' },
+        ],
+      });
+
       await sendEmail(
         customerEmail,
         'Welcome to ASN Consulting — Next Steps',
@@ -165,6 +178,26 @@ export async function POST(req: NextRequest) {
             },
           });
         }
+      }
+
+      const DIY_TAG_MAP: Record<string, number> = {
+        individual: AC_TAGS.diy_individual,
+        partner:    AC_TAGS.diy_partner,
+        family:     AC_TAGS.diy_family,
+        roe:        AC_TAGS.diy_roe,
+      };
+      const diyTagId = DIY_TAG_MAP[planTier];
+      if (diyTagId && customerEmail) {
+        await acTrackEvent({
+          email: customerEmail,
+          firstName: session.customer_details?.name?.split(' ')[0] || '',
+          lastName: session.customer_details?.name?.split(' ').slice(1).join(' ') || '',
+          tagId: diyTagId,
+          fields: [
+            { fieldId: AC_FIELDS.purchase_type, value: planTier },
+            { fieldId: AC_FIELDS.purchase_date, value: new Date().toISOString().split('T')[0] },
+          ],
+        });
       }
 
       const tierLabel = planTier.charAt(0).toUpperCase() + planTier.slice(1);

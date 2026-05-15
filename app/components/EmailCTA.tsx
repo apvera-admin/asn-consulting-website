@@ -20,9 +20,18 @@ export default function EmailCTA() {
     return () => observer.disconnect();
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Phase 2: wire to Resend / ActiveCampaign
+    try {
+      await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+    } catch {
+      // Non-blocking — form still appears to succeed
+    }
+    setEmail('');
   };
 
   return (

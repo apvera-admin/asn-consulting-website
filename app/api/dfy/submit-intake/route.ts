@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { adminClient } from '@/lib/supabase/admin';
+import { acTrackEvent, AC_TAGS, AC_FIELDS } from '@/lib/activecampaign';
 
 export async function POST(req: NextRequest) {
   try {
@@ -45,6 +46,16 @@ export async function POST(req: NextRequest) {
       photo_url: photoUrl,
       form_data: intakeData,
       submitted_at: new Date().toISOString(),
+    });
+
+    await acTrackEvent({
+      email: intakeData.email || user?.email || '',
+      firstName: intakeData.first_name || '',
+      lastName: intakeData.last_name || '',
+      tagId: AC_TAGS.dfy_intake_submitted,
+      fields: [
+        { fieldId: AC_FIELDS.case_status, value: 'documents_in_preparation' },
+      ],
     });
 
     const fieldLines = Object.entries(intakeData)

@@ -117,9 +117,22 @@ export default function TaxRemedyPage() {
     }));
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setSubmitted(true);
+    try {
+      await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: form.email,
+          firstName: form.firstName,
+          tagId: 12, // AC_TAGS.tax_lead
+        }),
+      });
+    } catch {
+      // Non-blocking — form submission already succeeded
+    }
   }
 
   return (
