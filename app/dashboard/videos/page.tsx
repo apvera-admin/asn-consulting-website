@@ -6,7 +6,7 @@ import styles from './page.module.css';
 const VIDEOS = [
   {
     step: 1,
-    vimeoId: 'https://vimeo.com/995124465',
+    vimeoId: 'https://vimeo.com/995124465/ff30fe4c73',
     title: 'Preparing Your Documents',
     desc: 'Learn how to correctly complete and organize your document package before notarization.',
     duration: '~15 min',
@@ -22,7 +22,7 @@ const VIDEOS = [
   },
   {
     step: 3,
-    vimeoId: 'https://vimeo.com/1162836571',
+    vimeoId: 'https://vimeo.com/1162836571/4ee079343b',
     title: 'Recording Your Documents',
     desc: 'How to file your documents on the public record using SovereignLedger.co. This step officially establishes your status.',
     duration: '~15 min',
@@ -59,6 +59,7 @@ export default async function VideosPage() {
                 src={`https://player.vimeo.com/video/${v.vimeoId}`}
                 allow="autoplay; fullscreen; picture-in-picture"
                 allowFullScreen
+                frameBorder="0"
                 title={v.title}
               />
             </div>
