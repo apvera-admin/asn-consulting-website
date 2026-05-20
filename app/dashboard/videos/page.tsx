@@ -2,11 +2,12 @@ import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/server';
 import styles from './page.module.css';
+import Script from 'next/script';
 
 const VIDEOS = [
   {
     step: 1,
-    vimeoId: 'https://vimeo.com/995124465/ff30fe4c73',
+    vimeoId: '995124465/ff30fe4c73',
     title: 'Preparing Your Documents',
     desc: 'Learn how to correctly complete and organize your document package before notarization.',
     duration: '~15 min',
@@ -14,7 +15,7 @@ const VIDEOS = [
   },
   {
     step: 2,
-    vimeoId: 'https://vimeo.com/762744851',
+    vimeoId: '762744851',
     title: 'Notarizing Your Documents',
     desc: 'Step-by-step guidance on getting your documents properly notarized — what to bring, what to say, and what to watch for.',
     duration: '~15 min',
@@ -22,7 +23,7 @@ const VIDEOS = [
   },
   {
     step: 3,
-    vimeoId: 'https://vimeo.com/1162836571/4ee079343b',
+    vimeoId: '1162836571/4ee079343b',
     title: 'Recording Your Documents',
     desc: 'How to file your documents on the public record using SovereignLedger.co. This step officially establishes your status.',
     duration: '~15 min',
@@ -30,7 +31,7 @@ const VIDEOS = [
   },
   {
     step: 4,
-    vimeoId: 'https://vimeo.com/766672933',
+    vimeoId: '766672933',
     title: 'Mailing Your Letters',
     desc: 'How to send certified mail to all appropriate parties, what tracking to keep, and how to confirm receipt.',
     duration: '~15 min',
@@ -55,13 +56,14 @@ export default async function VideosPage() {
         {VIDEOS.map(v => (
           <div key={v.step} className={styles.videoCard}>
             <div className={styles.videoEmbed}>
-              <iframe
-                src={`https://player.vimeo.com/video/${v.vimeoId}`}
-                allow="autoplay; fullscreen; picture-in-picture"
-                allowFullScreen
-                frameBorder="0"
-                title={v.title}
-              />
+<iframe
+  src={`https://player.vimeo.com/video/${v.vimeoId}?badge=0&autopause=0&player_id=0&app_id=58479`}
+  allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+  referrerPolicy="strict-origin-when-cross-origin"
+  allowFullScreen
+  frameBorder="0"
+  title={v.title}
+/>
             </div>
             <div className={styles.videoInfo}>
               <p className={styles.stepLabel}>Step 0{v.step}</p>
@@ -93,5 +95,6 @@ export default async function VideosPage() {
         </Link>
       </div>
     </div>
+    <Script src="https://player.vimeo.com/api/player.js" />
   );
 }
