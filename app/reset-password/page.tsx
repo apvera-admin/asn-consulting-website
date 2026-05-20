@@ -20,7 +20,7 @@ export default function ResetPasswordPage() {
 
     const supabase = createClient();
     const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/update-password`,
+      redirectTo: `https://www.asnconsulting.co/auth/callback?type=recovery`,
     });
 
     if (resetError) {
