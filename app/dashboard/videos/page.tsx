@@ -6,7 +6,7 @@ import styles from './page.module.css';
 const VIDEOS = [
   {
     step: 1,
-    vimeoId: 'https://vimeo.com/995124465/ff30fe4c73?fl=ip&fe=ec',
+    vimeoId: 'https://vimeo.com/995124465',
     title: 'Preparing Your Documents',
     desc: 'Learn how to correctly complete and organize your document package before notarization.',
     duration: '~15 min',
@@ -14,7 +14,7 @@ const VIDEOS = [
   },
   {
     step: 2,
-    vimeoId: 'https://vimeo.com/762744851?fl=tl&fe=ec',
+    vimeoId: 'https://vimeo.com/762744851',
     title: 'Notarizing Your Documents',
     desc: 'Step-by-step guidance on getting your documents properly notarized — what to bring, what to say, and what to watch for.',
     duration: '~15 min',
@@ -22,7 +22,7 @@ const VIDEOS = [
   },
   {
     step: 3,
-    vimeoId: 'https://vimeo.com/1162836571?fl=tl&fe=ec',
+    vimeoId: 'https://vimeo.com/1162836571',
     title: 'Recording Your Documents',
     desc: 'How to file your documents on the public record using SovereignLedger.co. This step officially establishes your status.',
     duration: '~15 min',
@@ -30,7 +30,7 @@ const VIDEOS = [
   },
   {
     step: 4,
-    vimeoId: 'https://vimeo.com/766672933?fl=tl&fe=ec',
+    vimeoId: 'https://vimeo.com/766672933',
     title: 'Mailing Your Letters',
     desc: 'How to send certified mail to all appropriate parties, what tracking to keep, and how to confirm receipt.',
     duration: '~15 min',
