@@ -94,7 +94,7 @@ export default async function VideosPage() {
           Go to Document Generator →
         </Link>
       </div>
+      <Script src="https://player.vimeo.com/api/player.js" />
     </div>
-    <Script src="https://player.vimeo.com/api/player.js" />
   );
 }
