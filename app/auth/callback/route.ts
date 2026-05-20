@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
 
   // Handle PKCE code exchange (OAuth and magic links)
   if (code) {
-    const supabase = createClient();
+    const supabase = await createClient();
     const { error } = await supabase.auth.exchangeCodeForSession(code);
     
     if (!error) {
@@ -25,7 +25,7 @@ export async function GET(request: NextRequest) {
 
   // Handle email OTP token hash (password reset emails)
   if (token_hash && type) {
-    const supabase = createClient();
+    const supabase = await createClient();
     const { error } = await supabase.auth.verifyOtp({
       token_hash,
       type: type as 'recovery' | 'email' | 'signup' | 'invite' | 'magiclink' | 'email_change',
