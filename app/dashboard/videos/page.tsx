@@ -7,7 +7,7 @@ import Script from 'next/script';
 const VIDEOS = [
   {
     step: 1,
-    vimeoId: '995124465/ff30fe4c73',
+    vimeoId: '995124465',
     title: 'Preparing Your Documents',
     desc: 'Learn how to correctly complete and organize your document package before notarization.',
     duration: '~15 min',
@@ -23,7 +23,7 @@ const VIDEOS = [
   },
   {
     step: 3,
-    vimeoId: '1162836571/4ee079343b',
+    vimeoId: '1162836571',
     title: 'Recording Your Documents',
     desc: 'How to file your documents on the public record using SovereignLedger.co. This step officially establishes your status.',
     duration: '~15 min',
