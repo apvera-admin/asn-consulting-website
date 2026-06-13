@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import DIYPageClient from './DIYPageClient';
 
 export const metadata: Metadata = {
-  title: 'DIY Status Correction Programs | ASN Consulting',
-  description:
-    'Choose from four DIY status correction packages. Complete document generation, step-by-step guidance, and everything you need to correct your status as an American State National.',
+  title: 'DIY Status Correction Program — Templates & Guidance',
+  description: 'Complete your own status correction with our full library of document templates, step-by-step guides, and a 27-day email course. Affordable self-guided path to American State National status.',
+  alternates: { canonical: 'https://www.asnconsulting.co/services/diy' },
 };
 
 export default function DIYPage() {

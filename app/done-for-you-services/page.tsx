@@ -6,9 +6,9 @@ import DFYCalculator from '../components/DFYCalculator';
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
-  title: 'Done For You Status Correction | ASN Consulting',
-  description:
-    'Our white-glove status correction service — every document prepared, filed, and recorded by an expert. You provide the information, we do the rest.',
+  title: 'Done-For-You Status Correction — Full Service Package',
+  description: 'Our team handles your entire status correction from document preparation to final recording. We prepare, file, and mail all documents to the proper agencies. Expert guidance every step of the way.',
+  alternates: { canonical: 'https://www.asnconsulting.co/done-for-you-services' },
 };
 
 const included = [

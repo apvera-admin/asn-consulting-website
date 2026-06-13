@@ -5,9 +5,9 @@ import SectionLabel from '../components/SectionLabel';
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
-  title: 'Private Irrevocable Express Trusts | ASN Consulting',
-  description:
-    'Establish a Private Irrevocable Express Trust under common law. Protect your assets, avoid probate, and operate outside the statutory commercial system. Schedule a call with our Trust Expert, Jenna.',
+  title: 'Private Trust Formation — Asset Protection',
+  description: 'Establish a common-law private irrevocable express trust to protect your assets and operate outside the commercial banking system. Expert guidance through every step of trust formation.',
+  alternates: { canonical: 'https://www.asnconsulting.co/private-trusts' },
 };
 
 // ── Inline SVG atoms ──────────────────────────────────────────────────────────
