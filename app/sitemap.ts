@@ -11,7 +11,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/tax-remedy-services',    priority: 0.8, changeFrequency: 'weekly'  },
     { path: '/thank-you',              priority: 0.3, changeFrequency: 'monthly' },
     { path: '/login',                  priority: 0.4, changeFrequency: 'monthly' },
-    { path: '/signup',                 priority: 0.5, changeFrequency: 'monthly' },
   ];
 
   return routes.map(({ path, priority, changeFrequency }) => ({

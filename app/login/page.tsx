@@ -85,8 +85,11 @@ export default function LoginPage() {
 
         <div className={styles.footer}>
           <p className={styles.footerText}>
-            Don&apos;t have an account?{' '}
-            <Link href="/signup" className={styles.footerLink}>Sign up</Link>
+            Accounts are created automatically when you purchase.{' '}
+            Questions? Email{' '}
+            <a href="mailto:support@asnconsulting.co" className={styles.footerLink}>
+              support@asnconsulting.co
+            </a>
           </p>
           <Link href="/" className={styles.backLink}>← Back to site</Link>
         </div>
