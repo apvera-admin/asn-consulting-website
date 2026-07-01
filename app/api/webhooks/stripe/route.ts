@@ -75,18 +75,61 @@ export async function POST(req: NextRequest) {
 
     // ── DFY purchase (done-for-you services) ──────────────────────────────
     if (sessionType === 'dfy_purchase') {
-      await adminClient
+      const { data: existingProfile } = await adminClient
         .from('profiles')
-        .upsert(
-          {
-            email: customerEmail,
-            plan_tier: 'dfy' as any,
+        .select('id')
+        .eq('email', customerEmail)
+        .single();
+
+      if (existingProfile) {
+        // Returning customer — update their existing profile
+        await adminClient
+          .from('profiles')
+          .update({
+            plan_tier: 'dfy',
             plan_purchased_at: new Date().toISOString(),
             stripe_customer_id: stripeCustomerId,
             dfy_services: session.metadata?.services ?? '',
+            dfy_created_at: new Date().toISOString(),
+            case_status: 'payment_received',
+            docs_prepared: false,
+            docs_mailed: false,
+            updated_at: new Date().toISOString(),
+          })
+          .eq('email', customerEmail);
+      } else {
+        // New customer — create auth user first; trigger creates the profile row
+        const { data: newUser, error: createError } = await adminClient.auth.admin.createUser({
+          email: customerEmail,
+          email_confirm: true,
+          user_metadata: {
+            full_name: session.customer_details?.name ?? '',
+            plan_tier: 'dfy',
           },
-          { onConflict: 'email' }
-        );
+        });
+
+        if (createError) {
+          console.error('Failed to create DFY auth user:', createError);
+        }
+
+        if (newUser?.user) {
+          await adminClient
+            .from('profiles')
+            .update({
+              full_name: session.customer_details?.name ?? '',
+              plan_tier: 'dfy',
+              plan_purchased_at: new Date().toISOString(),
+              stripe_customer_id: stripeCustomerId,
+              dfy_services: session.metadata?.services ?? '',
+              dfy_created_at: new Date().toISOString(),
+              case_status: 'payment_received',
+              docs_prepared: false,
+              docs_mailed: false,
+              updated_at: new Date().toISOString(),
+            })
+            .eq('id', newUser.user.id);
+        }
+      }
 
       await acTrackEvent({
         email: customerEmail,
