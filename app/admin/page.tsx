@@ -13,9 +13,22 @@ interface UserProfile {
   submissions_used: number;
   plan_purchased_at: string | null;
   hha_signed: boolean | null;
+  hha_signed_at: string | null;
+  hha_signature_name: string | null;
+  hha_ip_address: string | null;
+  case_status: string | null;
+  dfy_services: string | null;
 }
 
-const PLAN_TIERS = ['individual', 'partner', 'family', 'roe'];
+interface IntakeSubmission {
+  id: string;
+  client_email: string;
+  photo_url: string | null;
+  form_data: Record<string, string>;
+  submitted_at: string;
+}
+
+const PLAN_TIERS = ['individual', 'partner', 'family', 'roe', 'dfy'];
 const ALL_SERVICES = ['status_correction', 'roe', 'baby_deed', 'marriage_paperwork'];
 const SUBMISSION_LIMITS: Record<string, number> = {
   individual: 1, partner: 2, family: 4, roe: 1,
@@ -43,6 +56,19 @@ function makeCardState(u: UserProfile): CardState {
   };
 }
 
+function formatDate(iso: string | null | undefined): string {
+  if (!iso) return '—';
+  return new Date(iso).toLocaleString('en-US', {
+    month: 'short', day: 'numeric', year: 'numeric',
+    hour: 'numeric', minute: '2-digit',
+  });
+}
+
+function intakeLink(email: string): string {
+  const base = typeof window !== 'undefined' ? window.location.origin : '';
+  return `${base}/dfy-intake?email=${encodeURIComponent(email)}`;
+}
+
 export default function AdminPage() {
   const [adminKey, setAdminKey] = useState('');
   const [keyInput, setKeyInput] = useState('');
@@ -55,6 +81,21 @@ export default function AdminPage() {
   const [cardStates, setCardStates] = useState<Record<string, CardState>>({});
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const searchTimer = useRef<ReturnType<typeof setTimeout>>();
+
+  // Add client modal
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [addForm, setAddForm] = useState({ full_name: '', email: '', services: '', send_email: true });
+  const [addLoading, setAddLoading] = useState(false);
+  const [addError, setAddError] = useState('');
+  const [addSuccess, setAddSuccess] = useState<{ intake_link: string } | null>(null);
+  const [addCopied, setAddCopied] = useState(false);
+
+  // Intake per-card state
+  const [intakeData, setIntakeData] = useState<Record<string, IntakeSubmission | null | 'loading'>>({});
+  const [intakeExpanded, setIntakeExpanded] = useState<Record<string, boolean>>({});
+
+  // Copy intake link feedback per user
+  const [copiedId, setCopiedId] = useState<string | null>(null);
 
   async function handlePasswordSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -77,7 +118,6 @@ export default function AdminPage() {
     }
   }
 
-  // Load all users on unlock, then debounce-search when query changes
   async function fetchUsers(emailFilter = '') {
     setLoading(true);
     try {
@@ -142,7 +182,71 @@ export default function AdminPage() {
     }
   }
 
-  // ── Password gate ──────────────────────────────────────────────────────────
+  async function handleAddClient(e: React.FormEvent) {
+    e.preventDefault();
+    setAddLoading(true);
+    setAddError('');
+    try {
+      const res = await fetch('/api/admin/add-client', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'x-admin-key': adminKey },
+        body: JSON.stringify(addForm),
+      });
+      const json = await res.json();
+      if (!res.ok) {
+        setAddError(json.error ?? 'Failed to create client');
+        return;
+      }
+      setAddSuccess({ intake_link: json.intake_link });
+      setAddForm({ full_name: '', email: '', services: '', send_email: true });
+      fetchUsers(query);
+    } catch {
+      setAddError('Network error — try again.');
+    } finally {
+      setAddLoading(false);
+    }
+  }
+
+  function closeAddModal() {
+    setShowAddModal(false);
+    setAddSuccess(null);
+    setAddError('');
+    setAddCopied(false);
+    setAddForm({ full_name: '', email: '', services: '', send_email: true });
+  }
+
+  async function loadIntake(userId: string, email: string) {
+    if (intakeData[userId] !== undefined) {
+      setIntakeExpanded(prev => ({ ...prev, [userId]: !prev[userId] }));
+      return;
+    }
+    setIntakeExpanded(prev => ({ ...prev, [userId]: true }));
+    setIntakeData(prev => ({ ...prev, [userId]: 'loading' }));
+    try {
+      const res = await fetch(`/api/admin/intake?email=${encodeURIComponent(email)}`, {
+        headers: { 'x-admin-key': adminKey },
+      });
+      const json = await res.json();
+      setIntakeData(prev => ({ ...prev, [userId]: json.intake ?? null }));
+    } catch {
+      setIntakeData(prev => ({ ...prev, [userId]: null }));
+    }
+  }
+
+  function copyIntakeLink(email: string, userId: string) {
+    navigator.clipboard.writeText(intakeLink(email)).catch(() => {});
+    setCopiedId(userId);
+    setTimeout(() => setCopiedId(null), 2000);
+  }
+
+  function copyAllIntakeFields(intake: IntakeSubmission) {
+    const lines = Object.entries(intake.form_data)
+      .map(([k, v]) => `${k}: ${v}`)
+      .join('\n');
+    navigator.clipboard.writeText(lines).catch(() => {});
+  }
+
+  // ── Password gate ─────────────────────────────────────────────────────────
   if (!adminKey) {
     return (
       <div className={styles.page}>
@@ -169,10 +273,91 @@ export default function AdminPage() {
     );
   }
 
-  // ── Main UI ────────────────────────────────────────────────────────────────
+  // ── Main UI ───────────────────────────────────────────────────────────────
   return (
     <div className={styles.page}>
       <div className={styles.warningBanner}>Admin Panel — Internal Use Only</div>
+
+      {/* ── Add Client Modal ── */}
+      {showAddModal && (
+        <div className={styles.modalBackdrop} onClick={closeAddModal}>
+          <div className={styles.modalCard} onClick={e => e.stopPropagation()}>
+            <div className={styles.modalAccent} />
+            <button className={styles.modalClose} onClick={closeAddModal}>✕</button>
+
+            <h2 className={styles.modalHeading}>Add New Client</h2>
+            <p className={styles.modalSub}>
+              Manually create a DFY client account. They&apos;ll get a link to sign their agreement and complete their intake form.
+            </p>
+
+            {!addSuccess ? (
+              <form onSubmit={handleAddClient} className={styles.modalForm}>
+                <div className={styles.modalField}>
+                  <label className={styles.modalLabel}>Full Name <span className={styles.req}>*</span></label>
+                  <input
+                    className={styles.modalInput}
+                    type="text"
+                    required
+                    value={addForm.full_name}
+                    onChange={e => setAddForm(f => ({ ...f, full_name: e.target.value }))}
+                  />
+                </div>
+                <div className={styles.modalField}>
+                  <label className={styles.modalLabel}>Email <span className={styles.req}>*</span></label>
+                  <input
+                    className={styles.modalInput}
+                    type="email"
+                    required
+                    value={addForm.email}
+                    onChange={e => setAddForm(f => ({ ...f, email: e.target.value }))}
+                  />
+                </div>
+                <div className={styles.modalField}>
+                  <label className={styles.modalLabel}>Services</label>
+                  <input
+                    className={styles.modalInput}
+                    type="text"
+                    placeholder="e.g. Status Correction, ROE"
+                    value={addForm.services}
+                    onChange={e => setAddForm(f => ({ ...f, services: e.target.value }))}
+                  />
+                </div>
+                <label className={styles.modalCheckLabel}>
+                  <input
+                    type="checkbox"
+                    checked={addForm.send_email}
+                    onChange={e => setAddForm(f => ({ ...f, send_email: e.target.checked }))}
+                  />
+                  <span>Email the client their intake link now</span>
+                </label>
+                {addError && <p className={styles.modalError}>{addError}</p>}
+                <button type="submit" className={styles.modalSubmit} disabled={addLoading}>
+                  {addLoading ? 'Creating…' : 'Create Client & Send Link'}
+                </button>
+              </form>
+            ) : (
+              <div className={styles.addSuccessPanel}>
+                <div className={styles.addSuccessBadge}>✓ Client Created</div>
+                <p className={styles.addSuccessLabel}>Intake Link</p>
+                <div className={styles.addLinkRow}>
+                  <span className={styles.addLinkText}>{addSuccess.intake_link}</span>
+                  <button
+                    className={`${styles.btn} ${styles.btnGold}`}
+                    onClick={() => {
+                      navigator.clipboard.writeText(addSuccess!.intake_link).catch(() => {});
+                      setAddCopied(true);
+                      setTimeout(() => setAddCopied(false), 2000);
+                    }}
+                  >
+                    {addCopied ? 'Copied!' : 'Copy'}
+                  </button>
+                </div>
+                <button className={styles.modalSubmit} onClick={closeAddModal}>Done</button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       <div className={styles.main}>
         <div className={styles.topRow}>
@@ -180,12 +365,17 @@ export default function AdminPage() {
             <h1 className={styles.adminHeading}>User Management</h1>
             <p className={styles.adminSub}>{allUsers.length} user{allUsers.length !== 1 ? 's' : ''}</p>
           </div>
-          <button
-            className={styles.logoutBtn}
-            onClick={() => { setAdminKey(''); setKeyInput(''); setAllUsers([]); setQuery(''); }}
-          >
-            Log Out
-          </button>
+          <div className={styles.topRowRight}>
+            <button className={styles.addClientBtn} onClick={() => setShowAddModal(true)}>
+              + Add Client
+            </button>
+            <button
+              className={styles.logoutBtn}
+              onClick={() => { setAdminKey(''); setKeyInput(''); setAllUsers([]); setQuery(''); }}
+            >
+              Log Out
+            </button>
+          </div>
         </div>
 
         <div className={styles.searchRow}>
@@ -222,11 +412,13 @@ export default function AdminPage() {
             SUBMISSION_LIMITS[user.plan_tier ?? ''] ??
             1;
           const atLimit = user.submissions_used >= effectiveLimit;
+          const showIntake = intakeExpanded[user.id];
+          const intake = intakeData[user.id];
 
           return (
             <div key={user.id} className={`${styles.userRow}${isOpen ? ` ${styles.userRowOpen}` : ''}`}>
 
-              {/* ── Summary row (always visible, clickable) ── */}
+              {/* ── Summary row ── */}
               <div
                 className={styles.rowSummary}
                 onClick={() => setExpandedId(isOpen ? null : user.id)}
@@ -234,20 +426,17 @@ export default function AdminPage() {
                 tabIndex={0}
                 onKeyDown={e => e.key === 'Enter' && setExpandedId(isOpen ? null : user.id)}
               >
-                {/* Email + name */}
                 <div className={styles.colIdentity}>
                   <span className={styles.rowEmail}>{user.email}</span>
                   {user.full_name && <span className={styles.rowName}>{user.full_name}</span>}
                 </div>
 
-                {/* Plan */}
                 <div className={styles.colPlan}>
                   {user.plan_tier
                     ? <span className={`${styles.badge} ${styles.badgePlan}`}>{user.plan_tier}</span>
                     : <span className={styles.rowMuted}>—</span>}
                 </div>
 
-                {/* Submissions */}
                 <div className={styles.colSubs}>
                   <span className={`${styles.subCount}${atLimit ? ` ${styles.subCountWarning}` : ''}`}>
                     {user.submissions_used} / {effectiveLimit}
@@ -255,14 +444,12 @@ export default function AdminPage() {
                   </span>
                 </div>
 
-                {/* HHA */}
                 <div className={styles.colHha}>
                   <span className={`${styles.badge} ${user.hha_signed ? styles.badgeHha : styles.badgeHhaNo}`}>
                     {user.hha_signed ? 'Signed' : 'Not signed'}
                   </span>
                 </div>
 
-                {/* Services */}
                 <div className={styles.colServices}>
                   {(user.purchased_services ?? []).length > 0
                     ? (user.purchased_services!.map(svc => (
@@ -271,7 +458,6 @@ export default function AdminPage() {
                     : <span className={styles.rowMuted}>None</span>}
                 </div>
 
-                {/* Chevron */}
                 <div className={`${styles.chevron}${isOpen ? ` ${styles.chevronOpen}` : ''}`}>
                   <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                     <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -279,7 +465,7 @@ export default function AdminPage() {
                 </div>
               </div>
 
-              {/* ── Expanded actions panel ── */}
+              {/* ── Expanded panel ── */}
               {isOpen && (
                 <div className={styles.expandPanel}>
 
@@ -303,7 +489,6 @@ export default function AdminPage() {
                   )}
 
                   <div className={styles.actions}>
-                    {/* Reset */}
                     <div className={styles.actionGroup}>
                       <button className={`${styles.btn} ${styles.btnRed}`} disabled={cs.saving}
                         onClick={() => patch(user.id, { submissions_used: 0 })}>
@@ -311,7 +496,6 @@ export default function AdminPage() {
                       </button>
                     </div>
 
-                    {/* Set used */}
                     <div className={styles.actionGroup}>
                       <span className={styles.actionLabel}>Set Used</span>
                       <input className={styles.actionInput} type="number" min={0}
@@ -323,7 +507,6 @@ export default function AdminPage() {
                       </button>
                     </div>
 
-                    {/* Override limit */}
                     <div className={styles.actionGroup}>
                       <span className={styles.actionLabel}>Override Limit</span>
                       <input className={styles.actionInput} type="number" min={0} placeholder="—"
@@ -337,7 +520,6 @@ export default function AdminPage() {
                       </button>
                     </div>
 
-                    {/* Add service */}
                     <div className={styles.actionGroup}>
                       <span className={styles.actionLabel}>Add Service</span>
                       <select className={styles.actionSelect} value={cs.addServiceVal}
@@ -359,7 +541,6 @@ export default function AdminPage() {
                       </button>
                     </div>
 
-                    {/* Plan tier */}
                     <div className={styles.actionGroup}>
                       <span className={styles.actionLabel}>Plan Tier</span>
                       <select className={styles.actionSelect} value={cs.planTierVal}
@@ -382,6 +563,103 @@ export default function AdminPage() {
                       {cs.feedback}
                     </div>
                   )}
+
+                  {/* ── HHA Status ── */}
+                  <div className={styles.detailSection}>
+                    <div className={styles.detailSectionHead}>
+                      <span className={styles.detailSectionLabel}>Hold Harmless Agreement</span>
+                      <button
+                        className={styles.copyLinkBtn}
+                        onClick={() => copyIntakeLink(user.email, user.id)}
+                      >
+                        {copiedId === user.id ? 'Copied!' : 'Copy Intake Link'}
+                      </button>
+                    </div>
+
+                    {user.hha_signed ? (
+                      <div className={styles.hhaSignedBlock}>
+                        <span className={`${styles.badge} ${styles.badgeHha}`}>HHA Signed ✓</span>
+                        <div className={styles.hhaDetails}>
+                          <span>Signed by: <strong>{user.hha_signature_name ?? '—'}</strong></span>
+                          <span>Date: <strong>{formatDate(user.hha_signed_at)}</strong></span>
+                          <span>IP: <strong>{user.hha_ip_address ?? '—'}</strong></span>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className={styles.hhaUnsignedBlock}>
+                        <span className={`${styles.badge} ${styles.badgeHhaNo}`}>HHA Not Signed</span>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* ── Intake Form ── */}
+                  <div className={styles.detailSection}>
+                    <div className={styles.detailSectionHead}>
+                      <span className={styles.detailSectionLabel}>Intake Form</span>
+                      <button
+                        className={`${styles.btn} ${styles.btnGold}`}
+                        onClick={() => loadIntake(user.id, user.email)}
+                      >
+                        {showIntake ? 'Hide Intake' : 'View Intake Form'}
+                      </button>
+                    </div>
+
+                    {showIntake && (
+                      <div className={styles.intakePanel}>
+                        {intake === 'loading' && (
+                          <p className={styles.intakeEmpty}>Loading…</p>
+                        )}
+
+                        {intake === null && (
+                          <div className={styles.intakeEmpty}>
+                            No intake form submitted yet.
+                          </div>
+                        )}
+
+                        {intake && intake !== 'loading' && (
+                          <>
+                            {intake.photo_url && (
+                              <div className={styles.intakePhotoRow}>
+                                <img
+                                  src={intake.photo_url}
+                                  alt="Client photo"
+                                  className={styles.intakeThumb}
+                                />
+                                <a
+                                  href={intake.photo_url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className={styles.intakePhotoLink}
+                                >
+                                  View Full Size ↗
+                                </a>
+                              </div>
+                            )}
+                            <div className={styles.intakeGrid}>
+                              {Object.entries(intake.form_data).map(([key, val]) => (
+                                <div key={key} className={styles.intakeField}>
+                                  <span className={styles.intakeKey}>{key.replace(/_/g, ' ')}</span>
+                                  <span className={styles.intakeVal}>{val || '—'}</span>
+                                </div>
+                              ))}
+                            </div>
+                            <div className={styles.intakeFooter}>
+                              <span className={styles.intakeDate}>
+                                Submitted {formatDate(intake.submitted_at)}
+                              </span>
+                              <button
+                                className={`${styles.btn} ${styles.btnGold}`}
+                                onClick={() => copyAllIntakeFields(intake as IntakeSubmission)}
+                              >
+                                Copy All for Generator
+                              </button>
+                            </div>
+                          </>
+                        )}
+                      </div>
+                    )}
+                  </div>
+
                 </div>
               )}
             </div>

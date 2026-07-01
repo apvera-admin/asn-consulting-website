@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
   let query = adminClient
     .from('profiles')
     .select(
-      'id, email, full_name, plan_tier, purchased_services, submission_limit_override, submissions_used, plan_purchased_at, hha_signed'
+      'id, email, full_name, plan_tier, purchased_services, submission_limit_override, submissions_used, plan_purchased_at, hha_signed, hha_signed_at, hha_signature_name, hha_ip_address, case_status, dfy_services'
     )
     .order('plan_purchased_at', { ascending: false })
     .limit(200);

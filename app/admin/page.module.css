@@ -479,3 +479,342 @@
   color: #E05A5A;
   border: 1px solid rgba(224, 90, 90, 0.2);
 }
+
+/* ── Top row right cluster ── */
+.topRowRight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.addClientBtn {
+  padding: 8px 18px;
+  background: var(--gold);
+  color: #0C0D11;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.18s;
+  white-space: nowrap;
+}
+
+.addClientBtn:hover { background: var(--gold-hover); }
+
+/* ── Modal ── */
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modalCard {
+  background: var(--bg-card);
+  border: 1px solid rgba(200, 150, 60, 0.2);
+  border-radius: 12px;
+  padding: 32px;
+  width: 100%;
+  max-width: 460px;
+  position: relative;
+  overflow: hidden;
+}
+
+.modalAccent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.modalClose {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 4px 6px;
+  line-height: 1;
+  transition: color 0.15s;
+}
+
+.modalClose:hover { color: var(--cream); }
+
+.modalHeading {
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 20px;
+  font-weight: 300;
+  color: var(--cream);
+  margin: 0 0 6px;
+}
+
+.modalSub {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0 0 22px;
+}
+
+.modalForm {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.modalField {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.modalLabel {
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.req { color: var(--gold); }
+
+.modalInput {
+  padding: 9px 12px;
+  background: var(--bg-secondary);
+  border: 1px solid rgba(200, 150, 60, 0.2);
+  border-radius: 5px;
+  color: var(--cream);
+  font-size: 13px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.18s;
+}
+
+.modalInput:focus { border-color: rgba(200, 150, 60, 0.5); }
+.modalInput::placeholder { color: var(--text-muted); }
+
+.modalCheckLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.modalError {
+  font-size: 12px;
+  color: #E05A5A;
+  margin: 0;
+}
+
+.modalSubmit {
+  padding: 11px 20px;
+  background: var(--gold);
+  color: #0C0D11;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.18s;
+  margin-top: 4px;
+}
+
+.modalSubmit:hover:not(:disabled) { background: var(--gold-hover); }
+.modalSubmit:disabled { opacity: 0.55; cursor: not-allowed; }
+
+.addSuccessPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.addSuccessBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  background: rgba(107, 196, 126, 0.1);
+  border: 1px solid rgba(107, 196, 126, 0.25);
+  border-radius: 4px;
+  color: #6BC47E;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  align-self: flex-start;
+}
+
+.addSuccessLabel {
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.addLinkRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-secondary);
+  border: 1px solid rgba(200, 150, 60, 0.15);
+  border-radius: 5px;
+  padding: 8px 10px;
+}
+
+.addLinkText {
+  flex: 1;
+  font-size: 11px;
+  color: var(--text-muted);
+  word-break: break-all;
+  min-width: 0;
+}
+
+/* ── Detail sections (HHA + Intake) ── */
+.detailSection {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.detailSectionHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.detailSectionLabel {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.copyLinkBtn {
+  background: none;
+  border: none;
+  color: var(--gold);
+  font-size: 11px;
+  cursor: pointer;
+  padding: 3px 0;
+  font-family: inherit;
+  transition: opacity 0.15s;
+}
+
+.copyLinkBtn:hover { opacity: 0.75; }
+
+/* HHA blocks */
+.hhaSignedBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hhaDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 12px;
+  color: var(--text-muted);
+  padding-left: 2px;
+}
+
+.hhaDetails strong {
+  color: var(--cream-muted);
+}
+
+.hhaUnsignedBlock {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ── Intake panel ── */
+.intakePanel {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  padding: 14px;
+  margin-top: 6px;
+}
+
+.intakeEmpty {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.intakePhotoRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.intakeThumb {
+  max-width: 120px;
+  border-radius: 6px;
+  display: block;
+}
+
+.intakePhotoLink {
+  font-size: 11px;
+  color: var(--gold);
+  text-decoration: none;
+}
+
+.intakePhotoLink:hover { text-decoration: underline; }
+
+.intakeGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 16px;
+}
+
+.intakeField {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.intakeKey {
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.intakeVal {
+  font-size: 13px;
+  color: var(--cream);
+  word-break: break-word;
+}
+
+.intakeFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.intakeDate {
+  font-size: 11px;
+  color: var(--text-muted);
+}
