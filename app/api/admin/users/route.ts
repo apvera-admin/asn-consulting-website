@@ -16,10 +16,8 @@ export async function GET(req: NextRequest) {
 
   let query = adminClient
     .from('profiles')
-    .select(
-      'id, email, full_name, plan_tier, purchased_services, submission_limit_override, submissions_used, plan_purchased_at, hha_signed, hha_signed_at, hha_signature_name, hha_ip_address, case_status, dfy_services'
-    )
-    .order('plan_purchased_at', { ascending: false })
+    .select('*')
+    .order('created_at', { ascending: false })
     .limit(200);
 
   if (email.length >= 2) {
@@ -29,7 +27,8 @@ export async function GET(req: NextRequest) {
   const { data, error } = await query;
 
   if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    console.error('Admin users fetch error:', error);
+    return NextResponse.json({ error: error.message, users: [] }, { status: 500 });
   }
 
   return NextResponse.json({ users: data ?? [] });
