@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/server';
-import { adminClient } from '@/lib/supabase/admin';
+import { getAdminClient } from '@/lib/supabase/admin';
 import styles from './page.module.css';
 
 const SUBMISSION_LIMITS: Record<string, number> = {
@@ -12,6 +12,7 @@ const SUBMISSION_LIMITS: Record<string, number> = {
 };
 
 export default async function DocumentsPage() {
+  const adminClient = getAdminClient();
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect('/login');
