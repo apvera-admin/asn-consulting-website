@@ -10,6 +10,8 @@ const nextConfig = {
       { source: '/post/where-the-fraud-begins', destination: '/blog', permanent: true },
       { source: '/post/what-does-the-paperwork-actually-do', destination: '/blog', permanent: true },
       { source: '/post/:slug*', destination: '/blog', permanent: true },
+      { source: '/service-page/email-1-or-2-quick-question-s', destination: '/tax-remedy-services', permanent: true },
+      { source: '/service-page/email-additional-support-q-a', destination: '/tax-remedy-services', permanent: true },
     ];
   },
 };
