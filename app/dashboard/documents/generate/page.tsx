@@ -21,7 +21,6 @@
 
 import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
-import { adminClient } from '@/lib/supabase/admin';
 
 const SUBMISSION_LIMITS: Record<string, number> = {
   individual: 1,

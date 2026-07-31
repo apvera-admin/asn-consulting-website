@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
-import { adminClient } from '@/lib/supabase/admin';
+import { getAdminClient } from '@/lib/supabase/admin';
 
 export const dynamic = 'force-dynamic';
 
@@ -44,6 +44,7 @@ async function sendEmail(to: string, subject: string, html: string) {
 }
 
 export async function POST(req: NextRequest) {
+  const adminClient = getAdminClient();
   const body = await req.text();
   const sig = req.headers.get('stripe-signature');
 
