@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { adminClient } from '@/lib/supabase/admin';
+import { getAdminClient } from '@/lib/supabase/admin';
 
 export const dynamic = 'force-dynamic';
 
@@ -8,6 +8,7 @@ function checkAdminKey(req: NextRequest) {
 }
 
 export async function GET(req: NextRequest) {
+  const adminClient = getAdminClient();
   if (!checkAdminKey(req)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }

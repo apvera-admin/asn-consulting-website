@@ -1,8 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
-import { adminClient } from '@/lib/supabase/admin';
+import { getAdminClient } from '@/lib/supabase/admin';
+
+export const dynamic = 'force-dynamic';
 
 export async function POST(req: NextRequest) {
+  const adminClient = getAdminClient();
   try {
     const body = await req.json();
     const { full_name, agreed } = body as { full_name: string; agreed: boolean };
