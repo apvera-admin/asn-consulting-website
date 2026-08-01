@@ -32,6 +32,88 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'correcting-your-status',
+    title: 'Correcting Your Status: What It Actually Means to Become an American State National',
+    excerpt: 'A plain-English guide to status correction — what it is, what it isn\'t, and why getting your decisions on the record matters. Move from the statutory jurisdiction back to the land and soil.',
+    date: 'August 1, 2026',
+    readTime: '6 min read',
+    category: 'Correcting Status',
+    author: 'ASN Consulting',
+    content: `
+    <p>Status correction is the process of moving yourself — the living man or woman — out of the statutory jurisdiction that operates under admiralty and maritime law, and back onto the land and soil jurisdiction that operates under common law.</p>
+
+    <p>That sounds heavy, so let's make it simple. At birth, a legal entity was created in your name — an <em>ens legis</em>, a fiction on paper, often called the "strawman." It looks like you. It's spelled like you (usually in all capital letters). But it isn't you. It's a corporate entity, and the system presumes that <strong>you</strong> and <strong>that entity</strong> are the same thing.</p>
+
+    <p>Status correction is how you rebut that presumption. Instead of letting the de facto government assume you are the strawman they created, you put your own declarations on the public record. You state, in your own hand, who you are and what your standing is.</p>
+
+    <p>That's the whole idea in one sentence: <strong>it's better to have your decisions on the record than to let someone else presume them for you.</strong></p>
+
+    <h2>What Status Correction Is Not</h2>
+
+    <p>Before going further, let's clear the air — because this space is full of noise, bad information, and people who will get you in trouble.</p>
+
+    <p><strong>There is no such thing as a "sovereign citizen."</strong> That phrase is an oxymoron, and anyone using it seriously doesn't understand the fundamentals. You cannot be sovereign and a citizen at the same time. Look at the word itself: <em>citizen</em> breaks down to <em>citi</em> (municipal) and <em>zen</em> (servant) — a municipal servant. A sovereign is not a servant. So the term contradicts itself. What we're talking about here is something entirely different, and if you've only heard the "sovereign citizen" caricature, set it aside. It's not this.</p>
+
+    <p><strong>This is not a magic button.</strong> Correcting your status does not change your life overnight. You will not wake up the next morning in a different world. What changes is far more specific: it changes how you understand and interact with government agencies. You begin to recognize who you actually are, and you understand why the government has been addressing the strawman all along.</p>
+
+    <p><strong>This is not a scheme to escape responsibility.</strong> Are there lawful ways to address debts? Yes. From an individual standpoint, is there a strong argument that you don't owe certain taxes? Yes — though there are real scenarios and situations that warrant paying, and it's not one-size-fits-all. But here's the part most people selling shortcuts won't tell you: the single most important thing is that you truly understand what you are doing before you make any moves. Acting on half-knowledge in this area is how people create problems for themselves.</p>
+
+    <h2>Why This Is a Foundation, Not a Finish Line</h2>
+
+    <p>In my view, freeing yourself from the grips of the system isn't a single event. It's a series of steps, taken in order, as you learn and grow more comfortable.</p>
+
+    <p>Status correction is the <strong>foundation</strong>. It's the first and most important step, because everything else builds on top of it. Once your standing is corrected and on the record, and once you actually understand what you've done and why, you're in a position to do more — private trusts, lawful money, and other tools that only make sense once the foundation is set.</p>
+
+    <p>But you have to build the foundation first. People who skip ahead — who chase the flashy end-result without correcting their status and without understanding the fundamentals — tend to get themselves into trouble. Do it in order. Learn as you go. Let your comfort and understanding grow with each step.</p>
+
+    <h2>The Documents Behind the Process</h2>
+
+    <p>Status correction isn't a feeling or a mindset — it's a paper trail. It's a set of formal, notarized declarations that get recorded and, in some cases, mailed via Registered Mail to the appropriate agencies. At a high level, the package includes declarations that accept your lawful trade name and re-convey it to the land and soil of your native state, affirm your political status as an American State National, expatriate the presumed federal political status, cancel presumed powers of attorney, establish you as the lawful holder in due course of the estate name, and provide witness testimony affirming your identity and standing.</p>
+
+    <p>Each of these is signed, notarized, and recorded. That's what "getting it on the record" actually means in practice — real documents, properly executed, entered into the public record.</p>
+
+    <h2>The Process in Four Steps</h2>
+
+    <p>We keep the process simple and clear:</p>
+
+    <ol>
+      <li><strong>Prepare Your Documents.</strong> You provide your information, and the complete document package is prepared — accurately and specific to you.</li>
+      <li><strong>Notarize.</strong> Your documents are witnessed and notarized. We provide guidance on exactly what you need and how to get it done.</li>
+      <li><strong>Record.</strong> Your notarized documents are recorded, establishing your standing on the public record.</li>
+      <li><strong>Mail Your Letters.</strong> The appropriate declarations are sent via Registered Mail to the relevant agencies, with tracking.</li>
+    </ol>
+
+    <p>That's the path. It's methodical, it's documented, and every step has a purpose.</p>
+
+    <h2>Doing It Yourself vs. Having It Done for You</h2>
+
+    <p>We've helped a few hundred people through their status correction, and we offer two paths depending on where you are:</p>
+
+    <ul>
+      <li><strong>Done-For-You:</strong> We handle the entire process for you — preparing every document, guiding you through notarization, recording, and mailing. This is for people who want it done right without navigating every detail themselves.</li>
+      <li><strong>Do-It-Yourself:</strong> We provide the tools, templates, and education so you can complete your own status correction at your own pace. This is for people who want to learn the process hands-on and do the work themselves.</li>
+    </ul>
+
+    <p>Both paths lead to the same place. The difference is simply how much you want to do yourself versus how much you want handled for you.</p>
+
+    <h2>An Honest Word Before You Begin</h2>
+
+    <p>Here's the truth we tell everyone: <strong>we are a tool in your journey — nothing more.</strong> We can prepare the documents, guide the process, and give you the education. But ultimately, the decisions you make and how you execute them are your responsibility.</p>
+
+    <p>This is weighty work. It deserves to be understood, not rushed. That's exactly why we don't just hand people paperwork and wish them luck. We want you to understand what you're doing and why, so that the foundation you build is one you can actually stand on.</p>
+
+    <blockquote>If you're tired of being presumed to be something you're not, and you want your decisions on the record, the best place to start is a conversation.</blockquote>
+
+    <p>Book a free strategy call. We'll talk through your situation, answer your questions, and help you understand whether status correction is the right next step for you. No pressure, no obligation — just clarity.</p>
+
+    <p><a href="/services">Book Your Free Strategy Call →</a></p>
+
+    <hr />
+
+    <p><em>ASN Consulting provides educational tools and document preparation services. We are not attorneys and do not provide legal advice. You are responsible for your own decisions and how you execute them.</em></p>
+  `,
+  },
+  {
     slug: 'introducing-the-american-federation-dollar',
     title: 'Introducing the American Federation Dollar (AFD): A Gold-Backed Digital Currency Transforming Global Finance',
     excerpt: 'The American Federation Treasury proudly announces the official launch of the American Federation Dollar (AFD), a groundbreaking gold-backed digital currency engineered to provide a stable, secure, and transparent alternative to traditional fiat currencies.',
